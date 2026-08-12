@@ -1,0 +1,20 @@
+1.4. ¿Qué diferencia encuentra entre las implementaciones de los puntos
+anteriores?
+
+
+
+a) ¿Podría darle comportamiento a algún método de la superclase
+ListaDeEnteros? ¿Por qué la clase se define como abstracta? Note que una
+subclase implementa la lista usando un arreglo de tamaño fijo y la otra
+usando nodos enlazados.
+
+
+
+b) Considerando los enlaces entre nodos, ¿qué diferencias existen entre
+agregar un nodo al principio de la lista, agregar un nodo en el medio y
+agregar un nodo al final?
+
+
+
+c) Una lista implementada con arreglos, ¿tiene su primer elemento en el
+índice del vector: 0, 1 o depende de la implementación?

@@ -1,0 +1,45 @@
+ ¿Podría resolver los ejercicios del punto 1 utilizando listas genéricas?
+
+Si se podria resolver el punto uno con la Lista Generica, ya que al estar configurada con el
+parametro T (generico) hace que la lista pueda ser de cualquier tipo de objeto cuando se inizialida
+por lo que se podria instanciar una lista generica de valores enteros.
+
+a) ¿Qué diferencia observa entre las implementaciones de ListaEnlazadaGenerica
+y ListaDeEnterosEnlazada?
+
+La diferencia principal es que:
+
+ListaDeEnterosEnlazada está diseñada específicamente para almacenar Integer.
+ListaEnlazadaGenerica<T> puede almacenar cualquier tipo que se indique al instanciarla.
+
+
+b) ¿Cómo se define el nodo genérico? ¿Cómo se crea una instancia del mismo?
+
+El nodo generico tiene un atributo T, por lo que cuando se instancia se le puede almacenar
+cualquier tipo de Objeto en esa variable.
+
+c) ¿Qué devuelve el método elemento() de la lista?
+
+elemento() devuelve el objeto que almacena el nodo
+
+
+d) ¿Cómo agregaría un método nuevo? Implemente un nuevo método de la lista
+que se llama agregar(T[]):boolean. El mismo debe agregar todos los elementos
+del arreglo que recibe como parámetro y retornar true si todos ellos fueron
+agregados.
+
+para agregar un metodo nuevo, primero agregaria el encabezado de metodo en ListaGenerica
+y luego lo implementaria en ListaGenericaEnlazada
+
+@Override
+public boolean agregar(T[] elementos) {
+    if (elementos == null)
+        return false;
+
+    for (T valor : elementos) {
+        if (!this.agregarFinal(valor))
+            return false;
+    }
+
+    return true;
+}

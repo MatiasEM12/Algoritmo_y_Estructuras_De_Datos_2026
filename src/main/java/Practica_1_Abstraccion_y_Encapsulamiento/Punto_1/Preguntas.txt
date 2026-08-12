@@ -2,11 +2,48 @@
 anteriores?
 
 
+La diferencia principal está en cómo almacenan los elementos.
+
+ListaDeEnterosConArreglos usa: private Integer[] datos = new Integer[30];
+
+por lo que: Tiene un tamaño físico fijo de 30.
+            Los elementos se almacenan en posiciones consecutivas del arreglo.
+            Al insertar en el medio o al principio hay que desplazar elementos.
+            Tiene un límite de 30 elementos.
+
+
+ListaDeEnterosEnlazada usa nodos utiliza: private NodoEntero inicio;
+                                          private NodoEntero actual;
+                                          private NodoEntero fin;
+
+Por lo que: No tiene un tamaño físico fijo.
+            Puede crecer dinámicamente.
+            Para insertar se modifican enlaces entre nodos.
+            No necesita desplazar todos los elementos.
+
+
 
 a) ¿Podría darle comportamiento a algún método de la superclase
 ListaDeEnteros? ¿Por qué la clase se define como abstracta? Note que una
 subclase implementa la lista usando un arreglo de tamaño fijo y la otra
 usando nodos enlazados.
+
+Sí, algunos métodos podrían tener una implementación común en ListaDeEnteros. Como por ejemplo: tamanio(),esVacia()
+
+pero los métodos principales que le dan el comportamiento a la lista como :
+
+agregarEn()
+eliminarEn()
+elemento()
+proximo()
+
+Se deben adaptar a la estructura de lista que se va a utilizar, ej:
+
+En un arreglo, para insertar en el medio tenés que desplazar elementos.
+En una lista enlazada, tenés que modificar enlaces entre nodos.
+
+Por eso ListaDeEnteros se define como abstracta: representa el comportamiento general de una lista,
+pero deja que cada implementación resuelva los detalles de acuerdo con su estructura interna.
 
 
 
@@ -14,7 +51,16 @@ b) Considerando los enlaces entre nodos, ¿qué diferencias existen entre
 agregar un nodo al principio de la lista, agregar un nodo en el medio y
 agregar un nodo al final?
 
+al agregar un nodo al inicio, implica que el nuevo nodo referencia a quien estaba primero en la lista y luego
+modificar el encabezado de la lista para que apunte al nuevo nodo.
+
+agregar un nodo en el medio, implica que el nuevo nodo apunte a su siguiente, y ahora su anterior apunte al nuevo nodo
+
+agregar un nodo al final de la lista implica que el ultimo nodo referencie al nuevo
 
 
 c) Una lista implementada con arreglos, ¿tiene su primer elemento en el
 índice del vector: 0, 1 o depende de la implementación?
+
+c) Depende de la implementación. El arreglo de Java empieza físicamente en índice 0,
+ pero la lista puede definir sus posiciones lógicas comenzando en 1.

@@ -21,21 +21,36 @@ public class PilaGenerica  <T> extends ListaGenerica<T> {
         aux.setDato(elem);
 
         if(comienzo == null){
-            comienzo=aux;
-            tope=aux;
+            this.comienzo=aux;
+            this.tope=aux;
         }else{
             aux.setSiguiente(tope);
-            tope = aux;
+            this.tope = aux;
         }
         tamanio++;
     }
 
     public T desapilar(){
-        return null;
+        T elem;
+        if(tope== null || comienzo == null){
+           return  null;
+        }else{
+            elem = tope.getDato();
+            tope = tope.getSiguiente();
+        }
+        tamanio--;
+        return elem;
     }
 
     public T tope(){
-        return null;
+        T elem;
+        if(tope== null || comienzo == null){
+            return  null;
+        }else{
+            elem = tope.getDato();
+        }
+
+        return elem;
     }
 
 

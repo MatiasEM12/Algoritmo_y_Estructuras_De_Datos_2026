@@ -1,12 +1,14 @@
 package tp01.ejercicio3;
 
 
+import tp01.ejercicio2.ListaEnlazadaGenerica;
 import tp01.ejercicio2.ListaGenerica;
 import tp01.ejercicio2.NodoGenerico;
 
 public class ColaGenerica <T> extends ListaGenerica<T> {
 
     private NodoGenerico<T> inicio;
+    private NodoGenerico<T> actual;
     private NodoGenerico<T> fin;
     private int tamanio;
 
@@ -14,6 +16,7 @@ public class ColaGenerica <T> extends ListaGenerica<T> {
     public ColaGenerica() {
         this.inicio = null;
         this.fin = null;
+        this.actual = null;
         this.tamanio = 0;
     }
     public void encolar(T elem){
@@ -39,6 +42,9 @@ public class ColaGenerica <T> extends ListaGenerica<T> {
         T elem = inicio.getDato();
         inicio = inicio.getSiguiente();
         tamanio--;
+        if (tamanio == 0) {
+            fin = null;
+        }
         return elem;
     }
 
@@ -56,23 +62,30 @@ public class ColaGenerica <T> extends ListaGenerica<T> {
 
     @Override
     public void comenzar() {
-
+        actual = inicio;
     }
 
 
     @Override
     public T proximo() {
-        return null;
+        T elem = this.actual.getDato();
+        this.actual = this.actual.getSiguiente();
+        return elem;
     }
 
     @Override
     public boolean fin() {
-        return true;
+        return actual == null ;
     }
 
     @Override
     public T elemento(int pos) {
-        return null;
+        if (pos < 1 || pos > this.tamanio()) // no es posicion valida
+            return null;
+        NodoGenerico<T> n = this.inicio;
+        while (pos-- > 1)
+            n = n.getSiguiente();
+        return n.getDato();
     }
 
     @Override
@@ -87,7 +100,8 @@ public class ColaGenerica <T> extends ListaGenerica<T> {
 
     @Override
     public boolean agregarFinal(T elem) {
-        return false;
+        encolar(elem);
+        return true;
     }
 
     @Override
@@ -102,7 +116,10 @@ public class ColaGenerica <T> extends ListaGenerica<T> {
 
     @Override
     public boolean incluye(T elem) {
-        return false;
+        NodoGenerico<T> n = this.inicio;
+        while (!(n == null) && !(n.getDato().equals(elem)))
+            n = n.getSiguiente();
+        return !(n == null);
     }
 
 
@@ -114,11 +131,24 @@ public class ColaGenerica <T> extends ListaGenerica<T> {
 
     @Override
     public boolean reemplazarEn(T elem, int pos) {
-        return false;
+        if (pos < 1 || pos > this.tamanio()) // posicion no valida
+            return false;
+        NodoGenerico<T> n = this.inicio;
+        while (!(n == null) && (pos > 1)) {
+            pos--;
+            n = n.getSiguiente();
+        }
+        n.setDato(elem);
+        return true;
     }
 
     @Override
     public ListaGenerica<T> clonar() {
-        return null;
+        ListaGenerica<T> nueva = new ListaEnlazadaGenerica<T>();
+        this.comenzar();
+        while (!this.fin()) {
+            nueva.agregarFinal(this.proximo());
+        }
+        return nueva;
     }
 }

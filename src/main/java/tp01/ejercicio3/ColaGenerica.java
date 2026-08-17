@@ -80,7 +80,10 @@ public class ColaGenerica <T> extends ListaGenerica<T> {
 
     @Override
     public T elemento(int pos) {
-        if (pos < 1 || pos > this.tamanio()) // no es posicion valida
+
+        //reutilice lo implementado en ListaEnlazadaGenerica
+
+        if (pos < 1 || pos > this.tamanio())
             return null;
         NodoGenerico<T> n = this.inicio;
         while (pos-- > 1)
@@ -116,6 +119,9 @@ public class ColaGenerica <T> extends ListaGenerica<T> {
 
     @Override
     public boolean incluye(T elem) {
+
+        //reutilice lo implementado en ListaEnlazadaGenerica
+
         NodoGenerico<T> n = this.inicio;
         while (!(n == null) && !(n.getDato().equals(elem)))
             n = n.getSiguiente();
@@ -131,7 +137,10 @@ public class ColaGenerica <T> extends ListaGenerica<T> {
 
     @Override
     public boolean reemplazarEn(T elem, int pos) {
-        if (pos < 1 || pos > this.tamanio()) // posicion no valida
+
+        //reutilice lo implementado en ListaEnlazadaGenerica
+
+        if (pos < 1 || pos > this.tamanio())
             return false;
         NodoGenerico<T> n = this.inicio;
         while (!(n == null) && (pos > 1)) {
@@ -144,6 +153,8 @@ public class ColaGenerica <T> extends ListaGenerica<T> {
 
     @Override
     public ListaGenerica<T> clonar() {
+        //reutilice lo implementado en ListaEnlazadaGenerica
+
         ListaGenerica<T> nueva = new ListaEnlazadaGenerica<T>();
         this.comenzar();
         while (!this.fin()) {

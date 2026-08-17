@@ -60,9 +60,13 @@ public class PilaGenerica  <T> extends ListaGenerica<T> {
 
     @Override
     public T proximo() {
+
+
         if (actual == null) {
             return null;
         }
+
+        //reutilice lo implementado en ListaEnlazadaGenerica
         T elem = actual.getDato();
         actual = actual.getSiguiente();
         return elem;
@@ -75,8 +79,8 @@ public class PilaGenerica  <T> extends ListaGenerica<T> {
 
     @Override
     public T elemento(int pos) {
-
-        if (pos < 1 || pos > this.tamanio()) // no es posicion valida
+        //reutilice lo implementado en ListaEnlazadaGenerica
+        if (pos < 1 || pos > this.tamanio())
             return null;
         NodoGenerico<T> n = this.tope;
         while (pos-- > 1)
@@ -115,16 +119,13 @@ public class PilaGenerica  <T> extends ListaGenerica<T> {
 
     @Override
     public boolean incluye(T elem) {
-        NodoGenerico<T> aux = tope;
 
-        while (aux != null) {
-            if (aux.getDato().equals(elem)) {
-                return true;
-            }
-            aux = aux.getSiguiente();
-        }
+        //reutilice lo implementado en ListaEnlazadaGenerica
+        NodoGenerico<T> n = tope;
+        while (!(n == null) && !(n.getDato().equals(elem)))
+            n = n.getSiguiente();
+        return !(n == null);
 
-        return false;
     }
 
 
@@ -135,7 +136,9 @@ public class PilaGenerica  <T> extends ListaGenerica<T> {
 
     @Override
     public boolean reemplazarEn(T elem, int pos) {
-        if (pos < 1 || pos > this.tamanio()) // posicion no valida
+
+        //reutilice lo implementado en ListaEnlazadaGenerica
+        if (pos < 1 || pos > this.tamanio())
             return false;
         NodoGenerico<T> n = this.tope;
         while (!(n == null) && (pos > 1)) {
@@ -148,6 +151,7 @@ public class PilaGenerica  <T> extends ListaGenerica<T> {
 
     @Override
     public ListaGenerica<T> clonar() {
+        //reutilice lo implementado en ListaEnlazadaGenerica
         ListaGenerica<T> nueva = new ListaEnlazadaGenerica<T>();
         this.comenzar();
         while (!this.fin()) {

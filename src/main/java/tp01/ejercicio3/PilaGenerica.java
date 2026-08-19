@@ -10,14 +10,14 @@ public class PilaGenerica  <T> {
     private ListaGenerica<T> datos;
 
 
-    public PilaGenerica(ListaGenerica<T> lista) {
+    public PilaGenerica() {
 
-        this.datos = lista;
+        this.datos = new ListaEnlazadaGenerica<>();
     }
 
     public void apilar(T elem){
 
-        datos.agregarFinal(elem);
+        datos.agregarInicio(elem);
     }
 
     public T desapilar(){
@@ -25,8 +25,8 @@ public class PilaGenerica  <T> {
         if (esVacia()) {
             return null;
         }
-        T elem = datos.elemento(datos.tamanio());
-        datos.eliminarEn(datos.tamanio());
+        T elem = datos.elemento(1);
+        datos.eliminarEn(1);
         return elem;
 
     }
@@ -35,7 +35,7 @@ public class PilaGenerica  <T> {
         if (esVacia()) {
             return null;
         }
-        return datos.elemento(datos.tamanio());
+        return datos.elemento(1);
     }
 
     public boolean esVacia() {

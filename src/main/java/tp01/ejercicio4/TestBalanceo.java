@@ -25,8 +25,7 @@ public class TestBalanceo {
             return;
         }
         PilaGenerica<Character> pila = new PilaGenerica<>();
-        for(int i = 0; i < test.length(); i++) {
-            char c = test.charAt(i);
+        for (char c : test.toCharArray()){
 
             if (validoApertura(c)) {
                 pila.apilar(c);

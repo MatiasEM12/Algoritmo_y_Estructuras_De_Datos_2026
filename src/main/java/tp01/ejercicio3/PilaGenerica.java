@@ -3,7 +3,6 @@ package tp01.ejercicio3;
 
 import tp01.ejercicio2.ListaEnlazadaGenerica;
 import tp01.ejercicio2.ListaGenerica;
-import tp01.ejercicio2.NodoGenerico;
 
 public class PilaGenerica  <T> {
 

@@ -5,28 +5,19 @@ import tp01.ejercicio2.ListaEnlazadaGenerica;
 import tp01.ejercicio2.ListaGenerica;
 import tp01.ejercicio2.NodoGenerico;
 
-public class PilaGenerica  <T> extends ListaGenerica<T> {
+public class PilaGenerica  <T> {
+
+    private ListaGenerica<T> datos;
 
 
-    private NodoGenerico<T> tope;
-    private NodoGenerico<T> actual;
-    private int tamanio;
+    public PilaGenerica(ListaGenerica<T> lista) {
 
-    public PilaGenerica() {
-        this.tope = null;
-        this.tamanio = 0;
+        this.datos = lista;
     }
 
     public void apilar(T elem){
-        NodoGenerico<T> aux = new NodoGenerico<T>();
-        aux.setDato(elem);
 
-        //el primer elemento de la lista tendra null como siguiente para identificarlo
-        aux.setSiguiente(tope);
-        //tope siempre sera el inicio de la lista
-        tope = aux;
-
-        tamanio++;
+        datos.agregarFinal(elem);
     }
 
     public T desapilar(){
@@ -34,129 +25,21 @@ public class PilaGenerica  <T> extends ListaGenerica<T> {
         if (esVacia()) {
             return null;
         }
-        T elem = tope.getDato();
-        tope = tope.getSiguiente();
-        tamanio--;
+        T elem = datos.elemento(datos.tamanio());
+        datos.eliminarEn(datos.tamanio());
         return elem;
+
     }
 
     public T tope(){
         if (esVacia()) {
             return null;
         }
-        return tope.getDato();
+        return datos.elemento(datos.tamanio());
     }
 
-
-    @Override
     public boolean esVacia() {
-        return (tope==null);
+        return datos.esVacia();
     }
 
-    @Override
-    public void comenzar() {
-        actual=tope;
-    }
-
-    @Override
-    public T proximo() {
-
-
-        if (actual == null) {
-            return null;
-        }
-
-        //reutilice lo implementado en ListaEnlazadaGenerica
-        T elem = actual.getDato();
-        actual = actual.getSiguiente();
-        return elem;
-    }
-
-    @Override
-    public boolean fin() {
-        return (actual==null);
-    }
-
-    @Override
-    public T elemento(int pos) {
-        //reutilice lo implementado en ListaEnlazadaGenerica
-        if (pos < 1 || pos > this.tamanio())
-            return null;
-        NodoGenerico<T> n = this.tope;
-        while (pos-- > 1)
-            n = n.getSiguiente();
-        return n.getDato();
-    }
-
-    @Override
-    public boolean agregarEn(T elem, int pos) {
-        //Una pila no inserta arbitrariamente
-        return false;
-    }
-
-    @Override
-    public boolean agregarInicio(T elem) {
-        apilar(elem);
-        return true;
-    }
-
-    @Override
-    public boolean agregarFinal(T elem) {
-        //No corresponde a la abstracción de pila
-        return false;
-    }
-
-    @Override
-    public boolean eliminar(T elem) {
-        return false;
-    }
-
-    @Override
-    public boolean eliminarEn(int pos) {
-        //Rompe la operación LIFO
-        return false;
-    }
-
-    @Override
-    public boolean incluye(T elem) {
-
-        //reutilice lo implementado en ListaEnlazadaGenerica
-        NodoGenerico<T> n = tope;
-        while (!(n == null) && !(n.getDato().equals(elem)))
-            n = n.getSiguiente();
-        return !(n == null);
-
-    }
-
-
-    @Override
-    public int tamanio() {
-        return tamanio;
-    }
-
-    @Override
-    public boolean reemplazarEn(T elem, int pos) {
-
-        //reutilice lo implementado en ListaEnlazadaGenerica
-        if (pos < 1 || pos > this.tamanio())
-            return false;
-        NodoGenerico<T> n = this.tope;
-        while (!(n == null) && (pos > 1)) {
-            pos--;
-            n = n.getSiguiente();
-        }
-        n.setDato(elem);
-        return true;
-    }
-
-    @Override
-    public ListaGenerica<T> clonar() {
-        //reutilice lo implementado en ListaEnlazadaGenerica
-        ListaGenerica<T> nueva = new ListaEnlazadaGenerica<T>();
-        this.comenzar();
-        while (!this.fin()) {
-            nueva.agregarFinal(this.proximo());
-        }
-        return nueva;
-    }
 }

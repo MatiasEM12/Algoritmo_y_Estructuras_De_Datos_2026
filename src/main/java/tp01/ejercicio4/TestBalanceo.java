@@ -1,6 +1,7 @@
 package tp01.ejercicio4;
 
 
+import tp01.ejercicio2.ListaEnlazadaGenerica;
 import tp01.ejercicio3.PilaGenerica;
 
 public class TestBalanceo {
@@ -24,7 +25,7 @@ public class TestBalanceo {
             System.out.println("balanceado");
             return;
         }
-        PilaGenerica<Character> pila = new PilaGenerica<>();
+        PilaGenerica<Character> pila = new PilaGenerica<>(new ListaEnlazadaGenerica<>());
         for (char c : test.toCharArray()){
 
             if (validoApertura(c)) {

@@ -1,7 +1,6 @@
 package tp01.ejercicio3;
 
 
-import tp01.ejercicio2.ListaEnlazadaGenerica;
 import tp01.ejercicio2.ListaGenerica;
 
 public class PilaGenerica  <T> {
@@ -9,14 +8,15 @@ public class PilaGenerica  <T> {
     private ListaGenerica<T> datos;
 
 
-    public PilaGenerica() {
+    public PilaGenerica(ListaGenerica<T> lista) {
 
-        this.datos = new ListaEnlazadaGenerica<>();
+        this.datos = lista;
     }
 
     public void apilar(T elem){
-
-        datos.agregarInicio(elem);
+        if(elem !=null){
+            datos.agregarInicio(elem);
+        }
     }
 
     public T desapilar(){

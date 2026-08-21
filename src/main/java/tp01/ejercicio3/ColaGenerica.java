@@ -12,7 +12,9 @@ public class ColaGenerica <T>  {
         this.datos = lista;
     }
     public void encolar(T elem){
-        datos.agregarFinal(elem);
+        if (elem !=null) {
+            datos.agregarFinal(elem);
+        }
     }
 
     public T desencolar(){

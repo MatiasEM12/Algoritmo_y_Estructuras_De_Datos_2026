@@ -3,6 +3,7 @@ package tp02;
 
 import tp01.ejercicio2.ListaEnlazadaGenerica;
 import tp01.ejercicio2.ListaGenerica;
+import tp01.ejercicio3.ColaGenerica;
 
 public class ArbolGeneral<T> {
 
@@ -73,7 +74,7 @@ public class ArbolGeneral<T> {
 	public ListaEnlazadaGenerica<T> preOrden() {
 
 		if (this.esVacio()) {
-			return null;
+			return new ListaEnlazadaGenerica<T>();
 		}
 
 
@@ -124,48 +125,170 @@ public class ArbolGeneral<T> {
 				}
 			}
 
-
-
 		}
 		resultado.agregarFinal(this.getDato());
 		return resultado;
 	}
 
-	public ListaEnlazadaGenerica<T> InOrden() {
-		Procedimiento Inorden(nodo)
-				Si nodo no es NULO entonces
-		Si nodo tiene hijos entonces
-		// Recorrer el primer hijo (el más izquierdo)
-		Inorden(primerHijo(nodo))
+	public ListaEnlazadaGenerica<T> inOrden() {
 
-		// Visitar la raíz del nodo actual
-		Visitar(nodo.valor)
+		if (this.esVacio()) {
+			return new ListaEnlazadaGenerica<T>();
+		}
 
-		// Recorrer los hijos restantes de izquierda a derecha
-		Para cada hijo en losHijosRestantes(nodo) hacer
-		Inorden(hijo)
-		Fin Para
-		Sino
-		// Si es un nodo hoja (sin hijos)
-		Visitar(nodo.valor)
-		Fin Si
-		Fin Si
-		Fin Procedimiento
-		return null;
+		ListaEnlazadaGenerica<T> resultado = new ListaEnlazadaGenerica<T>();
+
+		if (this.tieneHijos()) {
+
+			ListaEnlazadaGenerica<ArbolGeneral<T>> hijos = (ListaEnlazadaGenerica<ArbolGeneral<T>>) this.getHijos();
+
+			hijos.comenzar();
+
+			// Primer hijo
+			ArbolGeneral<T> primerHijo = hijos.proximo();
+
+			ListaEnlazadaGenerica<T> listaHijo = primerHijo.inOrden();
+			listaHijo.comenzar();
+
+			while (!listaHijo.fin()) {
+				resultado.agregarFinal(listaHijo.proximo());
+			}
+
+			// Nodo actual
+			resultado.agregarFinal(this.getDato());
+
+			// Resto de los hijos
+			while (!hijos.fin()) {
+
+				ArbolGeneral<T> hijo = hijos.proximo();
+
+				listaHijo = hijo.inOrden();
+
+				listaHijo.comenzar();
+
+				while (!listaHijo.fin()) {
+					resultado.agregarFinal(listaHijo.proximo());
+				}
+			}
+
+		} else {
+			// Si es hoja
+			resultado.agregarFinal(this.getDato());
+		}
+
+		return resultado;
+	}
+
+	public ListaEnlazadaGenerica<T> porNivel() {
+
+		ColaGenerica<ArbolGeneral<T>> cola = new ColaGenerica<>(new ListaEnlazadaGenerica<>());
+		ListaEnlazadaGenerica<T> resultado = new ListaEnlazadaGenerica<T>();
+
+		cola.encolar(this);
+		while(!cola.esVacia()){
+			ArbolGeneral<T> nodo = cola.desencolar();
+			resultado.agregarFinal(nodo.getDato());
+			if(nodo.tieneHijos()){
+				ListaEnlazadaGenerica<ArbolGeneral<T>> hijos = (ListaEnlazadaGenerica<ArbolGeneral<T>>) nodo.getHijos();
+				hijos.comenzar();
+				while(!hijos.fin()){
+					cola.encolar(hijos.proximo());
+				}
+			}
+		}
+
+
+
+		return resultado;
 	}
 	public Integer altura() {
-		// Falta implementar..
-		return 0;
-	}
 
+		if (this.esVacio() || this.esHoja()) {
+			return 0;
+		}
+
+		Integer mayor = 0;
+
+		ListaEnlazadaGenerica<ArbolGeneral<T>> hijos = (ListaEnlazadaGenerica<ArbolGeneral<T>>) this.getHijos();
+
+		hijos.comenzar();
+
+		while (!hijos.fin()) {
+
+			ArbolGeneral<T> hijo = hijos.proximo();
+
+			Integer alturaHijo = hijo.altura();
+
+			if (alturaHijo > mayor) {
+				mayor = alturaHijo;
+			}
+		}
+
+		return mayor + 1;
+	}
 	public Integer nivel(T dato) {
-		// falta implementar
+
+		if (this.esVacio()) {
+			return -1;
+		}
+
+		if (this.getDato().equals(dato)) {
+			return 0;
+		}
+
+		ListaEnlazadaGenerica<ArbolGeneral<T>> hijos = (ListaEnlazadaGenerica<ArbolGeneral<T>>) this.getHijos();
+
+		hijos.comenzar();
+
+		while (!hijos.fin()) {
+
+			ArbolGeneral<T> hijo = hijos.proximo();
+
+			Integer nivelHijo = hijo.nivel(dato);
+
+			if (nivelHijo != -1) {
+				return nivelHijo + 1;
+			}
+		}
+
 		return -1;
 	}
-
 	public Integer ancho() {
-		// Falta implementar..
-		return 0;
+
+		if (this.esVacio()) {
+			return 0;
+		}
+
+		ListaEnlazadaGenerica<ArbolGeneral<T>> cola = new ListaEnlazadaGenerica<ArbolGeneral<T>>();
+
+		cola.agregarFinal(this);
+
+		Integer mayor = 0;
+
+		while (!cola.esVacia()) {
+
+			Integer cantidadNivel = cola.tamanio();
+
+			if (cantidadNivel > mayor) {
+				mayor = cantidadNivel;
+			}
+
+			for (int i = 0; i < cantidadNivel; i++) {
+
+				ArbolGeneral<T> nodo = cola.elemento(0);
+				cola.eliminar(nodo);
+
+				ListaEnlazadaGenerica<ArbolGeneral<T>> hijos = (ListaEnlazadaGenerica<ArbolGeneral<T>>) nodo.getHijos();
+
+				hijos.comenzar();
+
+				while (!hijos.fin()) {
+					cola.agregarFinal(hijos.proximo());
+				}
+			}
+		}
+
+		return mayor;
 	}
 
 }

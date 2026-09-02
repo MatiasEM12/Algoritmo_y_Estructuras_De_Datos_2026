@@ -8,7 +8,7 @@ public class TestCola {
     public static void main(String[] args) {
 
         // Creo la cola utilizando una lista
-        ColaGenerica<Integer> cola = new ColaGenerica<Integer>(new ListaEnlazadaGenerica<>());
+        ColaGenerica<Integer> cola = new ColaGenerica<Integer>();
 
         // Verifico que inicialmente esté vacía
         System.out.println("¿La cola está vacía? " + cola.esVacia());

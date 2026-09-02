@@ -15,7 +15,7 @@ public class TestPorNivel {
         ArbolGeneral<Integer> nodo6 = new ArbolGeneral<>(6);
         ArbolGeneral<Integer> nodo7 = new ArbolGeneral<>(7);
 
-        // Construir el árbol
+
         nodo1.agregarHijo(nodo2);
         nodo1.agregarHijo(nodo3);
         nodo1.agregarHijo(nodo4);
@@ -25,20 +25,12 @@ public class TestPorNivel {
 
         nodo4.agregarHijo(nodo7);
 
-        /*
-         *        1
-         *      / | \
-         *     2  3  4
-         *    / \    |
-         *   5   6   7
-         */
-
         ListaEnlazadaGenerica<Integer> resultado = nodo1.porNivel();
 
         System.out.println("Recorrido por nivel:");
 
         resultado.comenzar();
-
+        //1 2 3 4 5 6 7
         while (!resultado.fin()) {
             System.out.print(resultado.proximo() + " ");
         }

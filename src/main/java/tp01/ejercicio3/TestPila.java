@@ -7,7 +7,7 @@ public class TestPila{
     public static void main(String[] args) {
 
         // Creo la pila utilizando una lista generica
-        PilaGenerica<Integer> pila = new PilaGenerica<Integer>(new ListaEnlazadaGenerica<>());
+        PilaGenerica<Integer> pila = new PilaGenerica<Integer>();
 
         // Verifico que inicialmente esté vacía
         System.out.println("¿La pila está vacía? " + pila.esVacia());

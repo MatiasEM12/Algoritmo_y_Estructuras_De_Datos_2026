@@ -1,6 +1,7 @@
 package tp01.ejercicio3;
 
 
+import tp01.ejercicio2.ListaEnlazadaGenerica;
 import tp01.ejercicio2.ListaGenerica;
 
 public class ColaGenerica <T>  {
@@ -8,8 +9,8 @@ public class ColaGenerica <T>  {
     private ListaGenerica<T> datos;
 
 
-    public ColaGenerica(ListaGenerica<T> lista) {
-        this.datos = lista;
+    public ColaGenerica() {
+        this.datos = new ListaEnlazadaGenerica<>();
     }
     public void encolar(T elem){
         if (elem !=null) {

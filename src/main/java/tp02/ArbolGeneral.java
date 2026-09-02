@@ -181,7 +181,7 @@ public class ArbolGeneral<T> {
 
 	public ListaEnlazadaGenerica<T> porNivel() {
 
-		ColaGenerica<ArbolGeneral<T>> cola = new ColaGenerica<>(new ListaEnlazadaGenerica<>());
+		ColaGenerica<ArbolGeneral<T>> cola = new ColaGenerica<>();
 		ListaEnlazadaGenerica<T> resultado = new ListaEnlazadaGenerica<T>();
 
 		cola.encolar(this);
@@ -208,17 +208,13 @@ public class ArbolGeneral<T> {
 		}
 
 		Integer mayor = 0;
-
-		ListaEnlazadaGenerica<ArbolGeneral<T>> hijos = (ListaEnlazadaGenerica<ArbolGeneral<T>>) this.getHijos();
-
+		ListaGenerica<ArbolGeneral<T>> hijos = this.getHijos();
 		hijos.comenzar();
 
 		while (!hijos.fin()) {
 
 			ArbolGeneral<T> hijo = hijos.proximo();
-
 			Integer alturaHijo = hijo.altura();
-
 			if (alturaHijo > mayor) {
 				mayor = alturaHijo;
 			}
@@ -236,7 +232,7 @@ public class ArbolGeneral<T> {
 			return 0;
 		}
 
-		ListaEnlazadaGenerica<ArbolGeneral<T>> hijos = (ListaEnlazadaGenerica<ArbolGeneral<T>>) this.getHijos();
+		ListaGenerica<ArbolGeneral<T>> hijos = this.getHijos();
 
 		hijos.comenzar();
 
@@ -278,7 +274,8 @@ public class ArbolGeneral<T> {
 				ArbolGeneral<T> nodo = cola.elemento(0);
 				cola.eliminar(nodo);
 
-				ListaEnlazadaGenerica<ArbolGeneral<T>> hijos = (ListaEnlazadaGenerica<ArbolGeneral<T>>) nodo.getHijos();
+				ListaGenerica<ArbolGeneral<T>> hijos = nodo.getHijos();
+
 
 				hijos.comenzar();
 

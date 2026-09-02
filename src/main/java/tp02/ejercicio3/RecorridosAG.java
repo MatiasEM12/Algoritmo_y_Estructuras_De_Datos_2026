@@ -62,6 +62,7 @@ public class RecorridosAG {
 
         listaPorNivel.comenzar();
         while(!listaPorNivel.fin()){
+
             Integer numero = listaPorNivel.proximo();
             if(numero % 2 != 0 && numero > n){
                 listaResultado.agregarFinal(numero);

@@ -201,6 +201,10 @@ public class ArbolGeneral<T> {
 
 		return resultado;
 	}
+
+
+
+	//EJERCICIO 6
 	public Integer altura() {
 
 		if (this.esVacio() || this.esHoja()) {
@@ -288,4 +292,99 @@ public class ArbolGeneral<T> {
 		return mayor;
 	}
 
+	public Boolean esAncestro(T a, T b) {
+
+		if( a ==null || b==null){
+			return false;
+		}
+
+		var hijos = this.getHijos();
+
+		while (!hijos.fin()) {
+			var hijo = hijos.proximo();
+
+			if (hijo.getDato().equals(a)) {
+
+				return hijo.buscarDescendiente(hijo, b);
+			}
+			if (hijo.esAncestro(a, b)) {
+				return true;
+			}
+
+		}
+
+		return false;
+	}
+
+
+
+
+	private Boolean buscarDescendiente(ArbolGeneral<T> padre, T b){
+		var hijos = padre.getHijos();
+
+		while (!hijos.fin()) {
+
+			var hijo = hijos.proximo();
+
+			if (hijo.getDato().equals(b)) {
+				return true;
+			}
+
+			if (hijo.buscarDescendiente(hijo, b)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public Boolean esArbolLleno(){
+
+		if(!this.esHoja()){
+
+			var hijos = this.getHijos();
+			var tamanio = hijos.tamanio();
+
+			while (!hijos.fin()){
+				var hijo = hijos.proximo();
+
+				if(hijo.tieneHijos() && hijo.getHijos().tamanio() != tamanio){
+					return false;
+				}
+
+				if (!hijo.esArbolLleno()) {
+					return false;
+				}
+			}
+
+		}
+		return true;
+	}
+	public Boolean esArbolCompleto() {
+
+		ColaGenerica<ArbolGeneral<T>> cola = new ColaGenerica<>();
+
+		cola.encolar(this);
+
+		boolean encontreHoja = false;
+
+		while (!cola.esVacia()) {
+
+			ArbolGeneral<T> nodo = cola.desencolar();
+
+			if (encontreHoja && nodo.tieneHijos()) {
+				return false;
+			}
+
+			if (nodo.esHoja()) {
+				encontreHoja = true;
+			} else {
+				var hijos = nodo.getHijos();
+
+				while (!hijos.fin()) {
+					cola.encolar(hijos.proximo());
+				}
+			}
+		}
+
+		return true;
+	}
 }

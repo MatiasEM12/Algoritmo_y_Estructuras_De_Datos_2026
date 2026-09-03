@@ -21,7 +21,7 @@ public class RedDeAguaPotable {
         return minimoCaudal(red, caudal);
     }
 
-    public double minimoCaudal(ArbolGeneral<Integer> nodo, double caudal){
+    private double minimoCaudal(ArbolGeneral<Integer> nodo, double caudal){
 
         if(red.esHoja()){
             return caudal;

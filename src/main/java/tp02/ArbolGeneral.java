@@ -381,7 +381,7 @@ public class ArbolGeneral<T> {
 
 				while (!hijos.fin()) {
 					cola.encolar(hijos.proximo());
-				}
+				}	
 			}
 		}
 

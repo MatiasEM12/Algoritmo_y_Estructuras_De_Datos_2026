@@ -27,12 +27,12 @@ public class RecorridosAG {
 
     public ListaGenerica< Integer > numerosImparesMayoresQueInOrden(ArbolGeneral <Integer> a, Integer n){
 
-        ListaEnlazadaGenerica<Integer> listaPostOrden = a.postOrden();
+        ListaEnlazadaGenerica<Integer> listaInOrden = a.inOrden();
         ListaEnlazadaGenerica<Integer> listaResultado = new ListaEnlazadaGenerica<>();
 
-        listaPostOrden.comenzar();
-        while(!listaPostOrden.fin()){
-            Integer numero = listaPostOrden.proximo();
+        listaInOrden.comenzar();
+        while(!listaInOrden.fin()){
+            Integer numero = listaInOrden.proximo();
             if(numero % 2 != 0 && numero > n){
                 listaResultado.agregarFinal(numero);
             }
@@ -42,12 +42,12 @@ public class RecorridosAG {
     }
 
     public ListaGenerica< Integer > numerosImparesMayoresQuePostOrden(ArbolGeneral <Integer> a, Integer n){
-        ListaEnlazadaGenerica<Integer> listaInOrden = a.postOrden();
+        ListaEnlazadaGenerica<Integer> listaPostOrden = a.postOrden();
         ListaEnlazadaGenerica<Integer> listaResultado = new ListaEnlazadaGenerica<>();
 
-        listaInOrden.comenzar();
-        while(!listaInOrden.fin()){
-            Integer numero = listaInOrden.proximo();
+        listaPostOrden.comenzar();
+        while(!listaPostOrden.fin()){
+            Integer numero = listaPostOrden.proximo();
             if(numero % 2 != 0 && numero > n){
                 listaResultado.agregarFinal(numero);
             }

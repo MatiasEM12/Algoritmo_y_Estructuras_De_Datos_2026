@@ -26,6 +26,14 @@ public class TestInOrden {
         nodo4.agregarHijo(nodo7);
 
 
+        /*
+         *        1
+         *      / | \
+         *     2  3  4
+         *    / \    |
+         *   5   6   7
+         */
+
         ListaEnlazadaGenerica<Integer> resultado = nodo1.inOrden();
 
         System.out.println("Resultado inorden:");

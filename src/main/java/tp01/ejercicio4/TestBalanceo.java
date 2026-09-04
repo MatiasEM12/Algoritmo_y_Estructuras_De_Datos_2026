@@ -25,7 +25,7 @@ public class TestBalanceo {
             System.out.println("balanceado");
             return;
         }
-        PilaGenerica<Character> pila = new PilaGenerica<>(new ListaEnlazadaGenerica<>());
+        PilaGenerica<Character> pila = new PilaGenerica<>();
         for (char c : test.toCharArray()){
 
             if (validoApertura(c)) {

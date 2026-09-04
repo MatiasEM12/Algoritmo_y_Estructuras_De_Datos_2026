@@ -190,7 +190,7 @@ public class ArbolGeneral<T> {
 			ArbolGeneral<T> nodo = cola.desencolar();
 			resultado.agregarFinal(nodo.getDato());
 			if(nodo.tieneHijos()){
-				var hijos = this.getHijos();
+				var hijos = nodo.getHijos();
 				hijos.comenzar();
 				while(!hijos.fin()){
 					cola.encolar(hijos.proximo());

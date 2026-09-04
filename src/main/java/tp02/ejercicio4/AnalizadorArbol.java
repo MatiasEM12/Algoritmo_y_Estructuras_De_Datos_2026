@@ -1,8 +1,6 @@
 package tp02.ejercicio4;
 import tp01.ejercicio2.ListaEnlazadaGenerica;
 import tp01.ejercicio2.ListaGenerica;
-import tp01.ejercicio3.ColaGenerica;
-import tp01.ejercicio3.PilaGenerica;
 import tp02.ArbolGeneral;
 
 public class AnalizadorArbol {
@@ -28,11 +26,10 @@ public class AnalizadorArbol {
 
             for (int i = 0; i < cantidadNivel; i++) {
 
-                ArbolGeneral<AreaEmpresa> nodo = cola.elemento(0);
+                ArbolGeneral<AreaEmpresa> nodo = cola.elemento(1);
 
-               sumaTardanza += nodo.getDato().getTardanza();
+                sumaTardanza += nodo.getDato().getTardanza();
                 cola.eliminar(nodo);
-
 
 
                 ListaGenerica<ArbolGeneral<AreaEmpresa>> hijos = nodo.getHijos();

@@ -3,7 +3,6 @@ package tp02.ejercicio3;
 import tp01.ejercicio2.ListaGenerica;
 import tp02.ArbolGeneral;
 
-import java.beans.DefaultPersistenceDelegate;
 
 public class TestRecorridosAG {
 

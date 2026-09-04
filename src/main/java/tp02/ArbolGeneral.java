@@ -83,7 +83,8 @@ public class ArbolGeneral<T> {
 
 		if (this.tieneHijos()) {
 
-			ListaEnlazadaGenerica<ArbolGeneral<T>> hijos = (ListaEnlazadaGenerica<ArbolGeneral<T>>) this.getHijos();
+			var hijos = this.getHijos();
+
 			hijos.comenzar();
 			while(!hijos.fin()){
 				ArbolGeneral<T> hijo = hijos.proximo();
@@ -113,7 +114,7 @@ public class ArbolGeneral<T> {
 
 		if (this.tieneHijos()) {
 
-			ListaEnlazadaGenerica<ArbolGeneral<T>> hijos = (ListaEnlazadaGenerica<ArbolGeneral<T>>) this.getHijos();
+			var hijos = this.getHijos();
 			hijos.comenzar();
 			while(!hijos.fin()){
 				ArbolGeneral<T> hijo = hijos.proximo();
@@ -140,7 +141,7 @@ public class ArbolGeneral<T> {
 
 		if (this.tieneHijos()) {
 
-			ListaEnlazadaGenerica<ArbolGeneral<T>> hijos = (ListaEnlazadaGenerica<ArbolGeneral<T>>) this.getHijos();
+			var hijos = this.getHijos();
 
 			hijos.comenzar();
 
@@ -189,15 +190,13 @@ public class ArbolGeneral<T> {
 			ArbolGeneral<T> nodo = cola.desencolar();
 			resultado.agregarFinal(nodo.getDato());
 			if(nodo.tieneHijos()){
-				ListaEnlazadaGenerica<ArbolGeneral<T>> hijos = (ListaEnlazadaGenerica<ArbolGeneral<T>>) nodo.getHijos();
+				var hijos = this.getHijos();
 				hijos.comenzar();
 				while(!hijos.fin()){
 					cola.encolar(hijos.proximo());
 				}
 			}
 		}
-
-
 
 		return resultado;
 	}
@@ -212,31 +211,37 @@ public class ArbolGeneral<T> {
 		}
 
 		Integer mayor = 0;
-		ListaGenerica<ArbolGeneral<T>> hijos = this.getHijos();
+		var hijos = this.getHijos();
 		hijos.comenzar();
 
 		while (!hijos.fin()) {
 
 			ArbolGeneral<T> hijo = hijos.proximo();
-			Integer alturaHijo = hijo.altura();
+
+			Integer alturaHijo = hijo.altura(); //la altura de cada hijo
+
+			//actualiza con quien tenga la mayor altura
 			if (alturaHijo > mayor) {
 				mayor = alturaHijo;
 			}
 		}
-
+		//se suma 1 por cada nivel nuevo
 		return mayor + 1;
 	}
+
 	public Integer nivel(T dato) {
 
 		if (this.esVacio()) {
 			return -1;
 		}
 
+		// Si encontramos el dato en este nodo, su nivel es 0
+		// respecto del subarbol que estamos analizando.
 		if (this.getDato().equals(dato)) {
 			return 0;
 		}
 
-		ListaGenerica<ArbolGeneral<T>> hijos = this.getHijos();
+		var hijos = this.getHijos();
 
 		hijos.comenzar();
 
@@ -244,13 +249,17 @@ public class ArbolGeneral<T> {
 
 			ArbolGeneral<T> hijo = hijos.proximo();
 
+			// se busca recursivamente el dato en cada hijo.
 			Integer nivelHijo = hijo.nivel(dato);
 
+
+			// Si se encontró, se suma 1 porque se esta
+			// un nivel por encima del hijo.
 			if (nivelHijo != -1) {
 				return nivelHijo + 1;
 			}
 		}
-
+		// El dato no está en el subárbol.
 		return -1;
 	}
 	public Integer ancho() {
@@ -261,28 +270,29 @@ public class ArbolGeneral<T> {
 
 		ListaEnlazadaGenerica<ArbolGeneral<T>> cola = new ListaEnlazadaGenerica<ArbolGeneral<T>>();
 
+		// la raíz en la cola.
 		cola.agregarFinal(this);
 
 		Integer mayor = 0;
 
 		while (!cola.esVacia()) {
-
+            //la cola contiene la cantidad de nodos que hay en el nivel actual
 			Integer cantidadNivel = cola.tamanio();
 
 			if (cantidadNivel > mayor) {
 				mayor = cantidadNivel;
 			}
-
+            //se procesan todos los nodos del nivel actual
 			for (int i = 0; i < cantidadNivel; i++) {
 
-				ArbolGeneral<T> nodo = cola.elemento(0);
+				ArbolGeneral<T> nodo = cola.elemento(1);
 				cola.eliminar(nodo);
 
 				ListaGenerica<ArbolGeneral<T>> hijos = nodo.getHijos();
 
 
 				hijos.comenzar();
-
+				// Agregamos los hijos a la cola para procesarlos en el siguiente nivel.
 				while (!hijos.fin()) {
 					cola.agregarFinal(hijos.proximo());
 				}
@@ -298,15 +308,16 @@ public class ArbolGeneral<T> {
 			return false;
 		}
 
-		var hijos = this.getHijos();
+		// Si el nodo actual es "a", buscamos "b" dentro de todos sus descendientes.
+		if (this.getDato().equals(a)) {
+			return buscarDescendiente(this, b);
+		}
 
+		var hijos = this.getHijos();
+		hijos.comenzar();
 		while (!hijos.fin()) {
 			var hijo = hijos.proximo();
-
-			if (hijo.getDato().equals(a)) {
-
-				return hijo.buscarDescendiente(hijo, b);
-			}
+			// Seguimos buscando "a" recursivamente.
 			if (hijo.esAncestro(a, b)) {
 				return true;
 			}
@@ -317,39 +328,47 @@ public class ArbolGeneral<T> {
 	}
 
 
-
-
 	private Boolean buscarDescendiente(ArbolGeneral<T> padre, T b){
 		var hijos = padre.getHijos();
 
+		hijos.comenzar();
 		while (!hijos.fin()) {
 
 			var hijo = hijos.proximo();
 
+
+			// Si encontramos "b", significa que es descendiente.
 			if (hijo.getDato().equals(b)) {
 				return true;
 			}
 
+			// Si no seguimos buscando más abajo en el árbol.
 			if (hijo.buscarDescendiente(hijo, b)) {
 				return true;
 			}
 		}
 		return false;
 	}
+
 	public Boolean esArbolLleno(){
 
+		// Una hoja no tiene hijos, por lo que cumple la condición.
 		if(!this.esHoja()){
 
 			var hijos = this.getHijos();
+			// Cantidad de hijos que tiene el nodo actual.
 			var tamanio = hijos.tamanio();
 
+			hijos.comenzar();
 			while (!hijos.fin()){
 				var hijo = hijos.proximo();
 
+				// Si el hijo también tiene hijos, verificamos que tenga la misma cantidad que el nodo actual
 				if(hijo.tieneHijos() && hijo.getHijos().tamanio() != tamanio){
 					return false;
 				}
 
+				//se verifica el subArbol
 				if (!hijo.esArbolLleno()) {
 					return false;
 				}
@@ -366,22 +385,28 @@ public class ArbolGeneral<T> {
 
 		boolean encontreHoja = false;
 
+
 		while (!cola.esVacia()) {
 
 			ArbolGeneral<T> nodo = cola.desencolar();
 
+			// Si ya encontramos una hoja anteriormente y ahora encontramos un nodo con hijos, el árbol no es completo.
 			if (encontreHoja && nodo.tieneHijos()) {
 				return false;
 			}
 
+			// Cuando encontramos la primera hoja
 			if (nodo.esHoja()) {
 				encontreHoja = true;
 			} else {
 				var hijos = nodo.getHijos();
 
+				hijos.comenzar();
+
+				// Los hijos se agregan a la cola para continuar el recorrido por niveles.
 				while (!hijos.fin()) {
 					cola.encolar(hijos.proximo());
-				}	
+				}
 			}
 		}
 

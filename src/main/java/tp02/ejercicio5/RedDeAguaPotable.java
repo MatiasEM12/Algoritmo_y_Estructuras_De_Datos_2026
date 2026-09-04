@@ -1,6 +1,6 @@
 package tp02.ejercicio5;
 
-import tp01.ejercicio2.ListaEnlazadaGenerica;
+
 import tp02.ArbolGeneral;
 
 public class RedDeAguaPotable {
@@ -23,7 +23,7 @@ public class RedDeAguaPotable {
 
     private double minimoCaudal(ArbolGeneral<Integer> nodo, double caudal){
 
-        if(red.esHoja()){
+        if(nodo.esHoja()){
             return caudal;
         }
 
@@ -35,7 +35,7 @@ public class RedDeAguaPotable {
 
         hijos.comenzar();
 
-        while(!hijos.esVacia()){
+        while(!hijos.fin()){
 
             var hijo = hijos.proximo();
             double minimoHijo = minimoCaudal(hijo, caudalHijo);

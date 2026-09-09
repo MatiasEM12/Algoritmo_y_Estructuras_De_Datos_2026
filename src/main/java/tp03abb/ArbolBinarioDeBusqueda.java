@@ -2,8 +2,8 @@ package tp03abb;
 
 public class ArbolBinarioDeBusqueda<T extends Comparable<T>> {
 	private T dato;
-	private ArbolBinario<T> hijoIzquierdo;   
-	private ArbolBinario<T> hijoDerecho; 
+	private ArbolBinarioDeBusqueda<T> hijoIzquierdo;
+	private ArbolBinarioDeBusqueda<T> hijoDerecho;
 
 	
 	public ArbolBinarioDeBusqueda() {
@@ -107,6 +107,14 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>> {
 
 	public boolean esVacio() {
 		return this.getDato() == null && !this.tieneHijoIzquierdo() && !this.tieneHijoDerecho();
+	}
+
+	private boolean tieneHijoIzquierdo() {
+		return this.hijoIzquierdo != null;
+	}
+
+	private boolean tieneHijoDerecho() {
+		return this.hijoDerecho != null;
 	}
 
 	public boolean esHoja() {

@@ -1,5 +1,7 @@
 package tp03ab;
 
+import tp01.ejercicio2.ListaEnlazadaGenerica;
+
 public class ArbolBinario<T> {
 	private T dato;
 	private ArbolBinario<T> hijoIzquierdo;   
@@ -79,21 +81,107 @@ public class ArbolBinario<T> {
 		return this.hijoDerecho!=null;
 	}
 
+	//ejercicio 2 -a)
 	public int contarHojas() {
+
+		if(esHoja()){
+			return 1;
+		}
+
+		if(tieneHijoIzquierdo() || tieneHijoDerecho()){
+		     return getHijoIzquierdo().contarHojas() + getHijoDerecho().contarHojas();
+		}
 		return 0;
 	}
-	
 
+	//ejercicio 2-b)
     public ArbolBinario<T> espejo() {
-		
-		return null;
+
+		ArbolBinario<T> espejo = new ArbolBinario<T>(this.getDato());
+
+		if(!esHoja()){
+			ArbolBinario<T> hijoIzquierdoEspejo = null;
+			ArbolBinario<T> hijoDerechoEspejo =null;
+
+
+			//swap
+			if(tieneHijoIzquierdo()) {
+				 hijoIzquierdoEspejo =  getHijoDerecho();
+			}
+
+			if(tieneHijoDerecho()) {
+				hijoDerechoEspejo = getHijoIzquierdo();
+			}
+
+			//recursion en los hijos
+			if(hijoIzquierdoEspejo!=null){
+				espejo.agregarHijoIzquierdo(hijoIzquierdoEspejo.espejo());
+			}
+			if(hijoDerechoEspejo!=null){
+
+				espejo().agregarHijoDerecho(hijoDerechoEspejo.espejo());
+			}
+		}
+
+		return espejo;
 	}
 
-
+//2 -c)
 	public void entreNiveles(int n, int m){
-		
+		if(n>m || n<0 || m<0){
+			return;
+		}
+		entreNiveles(n, m, 0);
+	}
+     //metodo axiliar que me permite hacer la recursion con el nivelActual
+	private  void entreNiveles(int n, int m, int nivelActual){
+		if(nivelActual>=n || nivelActual<=m  ){
+			System.out.println(this.getDato());
+
+			if(tieneHijoIzquierdo()){
+				var hijoIzquierdo = getHijoIzquierdo();
+				hijoIzquierdo.entreNiveles(n, m, nivelActual+1);
+			}
+			if(tieneHijoDerecho()){
+				var hijoDerecho= getHijoDerecho();
+				hijoDerecho.entreNiveles(n, m, nivelActual+1);
+			}
+		}
 	}
 
-	
+	//metodos para el ejercicio 3 a y b
 
+	public ListaEnlazadaGenerica<T> inOrden() {
+
+
+
+	}
+
+
+	public ListaEnlazadaGenerica<T> postOrden() {
+
+		ListaEnlazadaGenerica<T> resultado = new ListaEnlazadaGenerica<T>();
+
+		if(tieneHijoDerecho() || tieneHijoIzquierdo()){
+
+			var hijos = new ListaEnlazadaGenerica<ArbolBinario<T>>();
+			hijos.agregarFinal(this.getHijoIzquierdo());
+			hijos.agregarFinal(this.getHijoDerecho());
+
+			hijos.comenzar();
+			while (!hijos.fin()) {
+				var hijo = hijos.proximo();
+				ListaEnlazadaGenerica<T> listaHijo = hijo.postOrden();
+
+				listaHijo.comenzar();
+				while (!listaHijo.fin()) {
+					resultado.agregarFinal(listaHijo.proximo());
+				}
+			}
+
+			resultado.agregarFinal(this.getDato());
+			return resultado;
+		}
+		return resultado;
+	}
 }

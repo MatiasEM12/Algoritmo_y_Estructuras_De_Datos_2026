@@ -1,6 +1,7 @@
-package tp03ab;
+package tp03.ejercicio3;
 
 import tp01.ejercicio2.ListaEnlazadaGenerica;
+import tp03ab.ArbolBinario;
 
 public class ContadorArbol {
 
@@ -12,8 +13,9 @@ public class ContadorArbol {
 
    public  ListaEnlazadaGenerica<Integer> numerosPares(){
         ListaEnlazadaGenerica<Integer> recorrido = new ListaEnlazadaGenerica<Integer>();
-        ListaEnlazadaGenerica<Integer> lista = listaInOrden(); //cambia entre inOrden o postOrden
-        lista.comenzar();
+        ListaEnlazadaGenerica<Integer> lista = listaInOrden();
+        //ListaEnlazadaGenerica<Integer> lista = listaPostOrden();
+       lista.comenzar();
         while (!lista.fin()) {
             Integer numero = lista.proximo();
             if (numero % 2 == 0) {

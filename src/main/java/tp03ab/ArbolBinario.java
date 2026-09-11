@@ -153,8 +153,39 @@ public class ArbolBinario<T> {
 
 	public ListaEnlazadaGenerica<T> inOrden() {
 
+        ListaEnlazadaGenerica<T> resultado = new ListaEnlazadaGenerica<T>();
 
+        if (!this.esVacio()) {
 
+            // recorrer hijo izquierdo
+            if (this.tieneHijoIzquierdo()) {
+
+                ListaEnlazadaGenerica<T> listaIzquierda = this.getHijoIzquierdo().inOrden();
+
+                listaIzquierda.comenzar();
+
+                while (!listaIzquierda.fin()) {
+                    resultado.agregarFinal(listaIzquierda.proximo());
+                }
+            }
+
+            // nodo actual
+            resultado.agregarFinal(this.getDato());
+
+            // recorrer hijo derecho
+            if (this.tieneHijoDerecho()) {
+
+                ListaEnlazadaGenerica<T> listaDerecha = this.getHijoDerecho().inOrden();
+
+                listaDerecha.comenzar();
+
+                while (!listaDerecha.fin()) {
+                    resultado.agregarFinal(listaDerecha.proximo());
+                }
+            }
+        }
+
+        return resultado;
 	}
 
 

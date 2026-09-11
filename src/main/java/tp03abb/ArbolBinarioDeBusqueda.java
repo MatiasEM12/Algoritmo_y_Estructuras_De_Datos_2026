@@ -71,13 +71,32 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>> {
 	}
 	 
 	public void agregar (Comparable<T> dato){
-		// TO DO
+		if (this.esVacio()) {
+			this.setDato((T) dato);
+		} else {
+			this.agregar(dato, this);
+		}
 		
 	} 
 	
 	private void agregar (Comparable<T> dato, ArbolBinarioDeBusqueda<T> arbol){
-		// TO DO
-		
+
+		if (dato.compareTo(arbol.getDato()) < 0) {
+			if (arbol.getHijoIzquierdo() == null) {
+				arbol.setHijoIzquierdo(new ArbolBinarioDeBusqueda<T>((T) dato));
+			} else {
+
+				this.agregar(dato, arbol.getHijoIzquierdo());
+			}
+		} else if (dato.compareTo(arbol.getDato()) > 0) {
+			if (arbol.getHijoDerecho() == null) {
+				arbol.setHijoDerecho(new ArbolBinarioDeBusqueda<T>((T) dato));
+			} else {
+				this.agregar(dato, arbol.getHijoDerecho());
+			}
+		} else if(dato.compareTo(arbol.getDato()) == 0) {
+			arbol.setDato((T) dato);
+		}
 	} 
 	
 	public ArbolBinarioDeBusqueda<T> buscarMayorDeLosMenores (ArbolBinarioDeBusqueda<T> arbol) {
@@ -121,6 +140,7 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>> {
 		return (!this.tieneHijoIzquierdo() && !this.tieneHijoDerecho());
 
 	}
+
 	
 
 }

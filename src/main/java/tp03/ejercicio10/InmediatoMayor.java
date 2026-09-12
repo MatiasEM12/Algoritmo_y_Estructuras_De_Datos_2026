@@ -19,7 +19,7 @@ public class InmediatoMayor {
     }
 
     private Integer inmediatoMayor(ArbolBinarioDeBusqueda<Integer> arbol) {
-        Integer sucesor = null;
+        Integer sucesor = -1;
         ArbolBinarioDeBusqueda<Integer> nodoActual = arbol;
 
         while(!nodoActual.esVacio()){

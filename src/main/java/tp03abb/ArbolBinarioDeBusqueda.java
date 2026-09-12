@@ -100,23 +100,49 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>> {
 	} 
 	
 	public ArbolBinarioDeBusqueda<T> buscarMayorDeLosMenores (ArbolBinarioDeBusqueda<T> arbol) {
-		// TO DO
-		return null;
+		ArbolBinarioDeBusqueda<T> aux = arbol.getHijoIzquierdo();
+
+		while (aux.getHijoDerecho() != null) {
+			aux = aux.getHijoDerecho();
+		}
+
+		return aux;
 	}
 	
 	public ArbolBinarioDeBusqueda<T> buscarMayor (ArbolBinarioDeBusqueda<T> arbol) {
-		// TO DO
-		return null;
+
+		ArbolBinarioDeBusqueda<T> mayor = null;
+		ArbolBinarioDeBusqueda<T> aux = arbol;
+		while(!aux.tieneHijoDerecho()) {
+			aux = aux.getHijoDerecho();
+			mayor = aux;
+		}
+
+
+
+		return mayor;
 	}
 	
 	public ArbolBinarioDeBusqueda<T> buscarMenorDeLosMayores (ArbolBinarioDeBusqueda<T> arbol) {
-		// TO DO
-		return null;
+		ArbolBinarioDeBusqueda<T> aux = arbol.getHijoDerecho();
+
+		while (aux.getHijoIzquierdo() != null) {
+			aux = aux.getHijoIzquierdo();
+		}
+
+		return aux;
 	}
 	
 	public ArbolBinarioDeBusqueda<T> buscarMenor (ArbolBinarioDeBusqueda<T> arbol) {
-		// TO DO
-		return null;
+
+		ArbolBinarioDeBusqueda<T> menor = null;
+		ArbolBinarioDeBusqueda<T> aux = arbol;
+		while(!aux.tieneHijoIzquierdo()) {
+			aux = aux.getHijoIzquierdo();
+			menor = aux;
+		}
+
+		return menor;
 	}
 	
 	@Override

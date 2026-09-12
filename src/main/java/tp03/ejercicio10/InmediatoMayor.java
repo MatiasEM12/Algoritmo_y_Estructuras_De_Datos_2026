@@ -14,13 +14,26 @@ public class InmediatoMayor {
         this.buscado=buscado;
     }
 
-    public Integer inmediatoMayor (){
-
+    public Integer inmediatoMayor() {
         return inmediatoMayor(this.arbol);
     }
 
     private Integer inmediatoMayor(ArbolBinarioDeBusqueda<Integer> arbol) {
+        Integer sucesor = null;
+        ArbolBinarioDeBusqueda<Integer> nodoActual = arbol;
+
+        while(!nodoActual.esVacio()){
+            if(buscado< nodoActual.getDato()){
+                sucesor = nodoActual.getDato();
+                nodoActual = nodoActual.getHijoIzquierdo();
+            }else{
+                if(buscado>= nodoActual.getDato()){
+                    nodoActual=nodoActual.getHijoDerecho();
+                }
+            }
+        }
 
 
+        return sucesor;
     }
 }

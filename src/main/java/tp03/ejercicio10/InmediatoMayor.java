@@ -22,14 +22,12 @@ public class InmediatoMayor {
         Integer sucesor = -1;
         ArbolBinarioDeBusqueda<Integer> nodoActual = arbol;
 
-        while(!nodoActual.esVacio()){
+        while(nodoActual != null && !nodoActual.esVacio()){
             if(buscado< nodoActual.getDato()){
                 sucesor = nodoActual.getDato();
                 nodoActual = nodoActual.getHijoIzquierdo();
             }else{
-                if(buscado>= nodoActual.getDato()){
-                    nodoActual=nodoActual.getHijoDerecho();
-                }
+                nodoActual = nodoActual.getHijoDerecho();
             }
         }
 

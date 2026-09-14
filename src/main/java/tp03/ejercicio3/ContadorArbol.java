@@ -13,8 +13,8 @@ public class ContadorArbol {
 
    public  ListaEnlazadaGenerica<Integer> numerosPares(){
         ListaEnlazadaGenerica<Integer> recorrido = new ListaEnlazadaGenerica<Integer>();
-        ListaEnlazadaGenerica<Integer> lista = listaInOrden();
-        //ListaEnlazadaGenerica<Integer> lista = listaPostOrden();
+        //ListaEnlazadaGenerica<Integer> lista = listaInOrden();
+        ListaEnlazadaGenerica<Integer> lista = listaPostOrden();
        lista.comenzar();
         while (!lista.fin()) {
             Integer numero = lista.proximo();

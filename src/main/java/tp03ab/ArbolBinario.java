@@ -147,8 +147,12 @@ public class ArbolBinario<T> {
 	}
      //metodo axiliar que me permite hacer la recursion con el nivelActual
 	private  void entreNiveles(int n, int m, int nivelActual){
-		if(nivelActual>=n || nivelActual<=m  ){
-			System.out.println(this.getDato());
+		if(nivelActual>=n && nivelActual<=m  ){
+
+			for (int i = 0; i < nivelActual; i++) {
+				System.out.print("    ");
+			}
+			System.out.println("└─ " + this.getDato());
 
 			if(tieneHijoIzquierdo()){
 				var hijoIzquierdo = getHijoIzquierdo();
@@ -204,27 +208,32 @@ public class ArbolBinario<T> {
 	public ListaEnlazadaGenerica<T> postOrden() {
 
 		ListaEnlazadaGenerica<T> resultado = new ListaEnlazadaGenerica<T>();
+		var hijos = new ListaEnlazadaGenerica<ArbolBinario<T>>();
 
-		if(tieneHijoDerecho() || tieneHijoIzquierdo()){
-
-			var hijos = new ListaEnlazadaGenerica<ArbolBinario<T>>();
-			hijos.agregarFinal(this.getHijoIzquierdo());
-			hijos.agregarFinal(this.getHijoDerecho());
-
-			hijos.comenzar();
-			while (!hijos.fin()) {
-				var hijo = hijos.proximo();
-				ListaEnlazadaGenerica<T> listaHijo = hijo.postOrden();
-
-				listaHijo.comenzar();
-				while (!listaHijo.fin()) {
-					resultado.agregarFinal(listaHijo.proximo());
-				}
-			}
-
-			resultado.agregarFinal(this.getDato());
-			return resultado;
+		if (tieneHijoIzquierdo()) {
+			hijos.agregarFinal(getHijoIzquierdo());
 		}
+
+		if (tieneHijoDerecho()) {
+			hijos.agregarFinal(getHijoDerecho());
+		}
+
+		hijos.comenzar();
+
+
+		while (!hijos.fin()) {
+			var hijo = hijos.proximo();
+			ListaEnlazadaGenerica<T> listaHijo = hijo.postOrden();
+
+			listaHijo.comenzar();
+			while (!listaHijo.fin()) {
+				resultado.agregarFinal(listaHijo.proximo());
+			}
+		}
+
+		resultado.agregarFinal(this.getDato());
 		return resultado;
+
+
 	}
 }

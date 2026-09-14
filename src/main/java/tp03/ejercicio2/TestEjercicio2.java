@@ -37,11 +37,11 @@ public class TestEjercicio2 {
         //test arbol espejo
 
         System.out.println("Arbol original: ");
-        imprimirArbol(arbolRaiz, 0);
+        arbolRaiz.entreNiveles(0, 2);
 
         ArbolBinario<Integer> arbolEspejo = arbolRaiz.espejo();
         System.out.println("Arbol espejo: ");
-        imprimirArbol(arbolEspejo, 0);
+        arbolEspejo.entreNiveles(0, 2);
 
         /* arbol espejo:
          *         1
@@ -53,25 +53,5 @@ public class TestEjercicio2 {
 
     }
 
-    private static  void imprimirArbol(ArbolBinario arbol, int nivel) {
-        if (arbol == null || arbol.esVacio()) {
-            return;
-        }
 
-        //Recorre primero el subárbol derecho
-        if (arbol.tieneHijoDerecho()) {
-            imprimirArbol(arbol.getHijoDerecho(), nivel + 1);
-        }
-
-        // Imprimir el nodo actual con sangría según su profundidad
-        for (int i = 0; i < nivel; i++) {
-            System.out.print("    "); // 4 espacios por cada nivel de profundidad
-        }
-        System.out.println("└─ " + arbol.getDato());
-
-        // Recorre el subárbol izquierdo
-        if (arbol.tieneHijoIzquierdo()) {
-            imprimirArbol(arbol.getHijoIzquierdo(), nivel + 1);
-        }
-    }
 }

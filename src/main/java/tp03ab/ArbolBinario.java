@@ -2,6 +2,8 @@ package tp03ab;
 
 import tp01.ejercicio2.ListaEnlazadaGenerica;
 
+import javax.annotation.processing.SupportedSourceVersion;
+
 public class ArbolBinario<T> {
 	private T dato;
 	private ArbolBinario<T> hijoIzquierdo;   
@@ -88,8 +90,18 @@ public class ArbolBinario<T> {
 			return 1;
 		}
 
+
 		if(tieneHijoIzquierdo() || tieneHijoDerecho()){
-		     return getHijoIzquierdo().contarHojas() + getHijoDerecho().contarHojas();
+
+			if(tieneHijoIzquierdo() && tieneHijoDerecho()){
+				return getHijoIzquierdo().contarHojas() + getHijoDerecho().contarHojas();
+			}
+			else if(tieneHijoIzquierdo()){
+				return getHijoIzquierdo().contarHojas();
+			}
+			else{
+				return getHijoDerecho().contarHojas();
+			}
 		}
 		return 0;
 	}
@@ -106,20 +118,20 @@ public class ArbolBinario<T> {
 
 			//swap
 			if(tieneHijoIzquierdo()) {
-				 hijoIzquierdoEspejo =  getHijoDerecho();
+				 hijoDerechoEspejo = getHijoIzquierdo();
 			}
 
 			if(tieneHijoDerecho()) {
-				hijoDerechoEspejo = getHijoIzquierdo();
+				hijoIzquierdoEspejo = getHijoDerecho();
 			}
 
-			//recursion en los hijos
+
 			if(hijoIzquierdoEspejo!=null){
 				espejo.agregarHijoIzquierdo(hijoIzquierdoEspejo.espejo());
 			}
 			if(hijoDerechoEspejo!=null){
 
-				espejo().agregarHijoDerecho(hijoDerechoEspejo.espejo());
+				espejo.agregarHijoDerecho(hijoDerechoEspejo.espejo());
 			}
 		}
 

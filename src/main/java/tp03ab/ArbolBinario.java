@@ -2,7 +2,7 @@ package tp03ab;
 
 import tp01.ejercicio2.ListaEnlazadaGenerica;
 
-import javax.annotation.processing.SupportedSourceVersion;
+
 
 public class ArbolBinario<T> {
 	private T dato;
@@ -235,5 +235,27 @@ public class ArbolBinario<T> {
 		return resultado;
 
 
+	}
+
+	//euxiliar para el ejercicio 4
+	public boolean estaLleno() {
+		boolean resultado = true;
+
+		if (!this.esVacio()) {
+
+			// Si tiene un solo hijo, no está lleno
+			if (tieneHijoIzquierdo() != tieneHijoDerecho()) {
+				resultado = false;
+			} else {
+
+				// Si tiene ambos hijos, se verifica recursivamente
+				if (tieneHijoIzquierdo() && tieneHijoDerecho()) {
+					resultado = getHijoIzquierdo().estaLleno()
+							&& getHijoDerecho().estaLleno();
+				}
+			}
+		}
+
+		return resultado;
 	}
 }

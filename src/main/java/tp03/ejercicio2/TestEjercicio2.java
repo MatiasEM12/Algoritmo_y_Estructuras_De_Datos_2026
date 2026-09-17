@@ -1,7 +1,7 @@
 package tp03.ejercicio2;
 
 import tp03ab.ArbolBinario;
-import tp03abb.ArbolBinarioDeBusqueda;
+
 
 public class TestEjercicio2 {
 
@@ -34,7 +34,7 @@ public class TestEjercicio2 {
         System.out.println("Cantidad de hojas: " + arbolRaiz.contarHojas()); // Debería imprimir 3
 
 
-        //test arbol espejo
+        //test arbol espejo y entre niveles
 
         System.out.println("Arbol original: ");
         arbolRaiz.entreNiveles(0, 2);

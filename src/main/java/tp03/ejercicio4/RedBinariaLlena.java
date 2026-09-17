@@ -11,7 +11,11 @@ public class RedBinariaLlena {
     }
 
     public int retardoReenvio(){
-        return retardoReenvioProfundidad(arbol);
+
+        if(arbol.estaLleno()){
+            return retardoReenvioProfundidad(arbol);
+        }
+        return -1;
     }
 
     private int retardoReenvioProfundidad(ArbolBinario<Integer> arbol){

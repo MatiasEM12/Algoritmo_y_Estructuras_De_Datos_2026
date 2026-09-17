@@ -154,11 +154,11 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>> {
 		return this.getDato() == null && !this.tieneHijoIzquierdo() && !this.tieneHijoDerecho();
 	}
 
-	private boolean tieneHijoIzquierdo() {
+	public boolean tieneHijoIzquierdo() {
 		return this.hijoIzquierdo != null;
 	}
 
-	private boolean tieneHijoDerecho() {
+	public boolean tieneHijoDerecho() {
 		return this.hijoDerecho != null;
 	}
 

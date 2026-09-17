@@ -29,7 +29,7 @@ public class RecorridoDeArbolBinario {
         if (!arbol.getDato().equals(buscado)) {
 
             if(signo){
-                camino.agregarFinal(-Math.abs(arbol.getDato()));
+                camino.agregarFinal(-Math.abs(arbol.getDato())); //paso el numero a negativo
             }else{
                 camino.agregarFinal(arbol.getDato());
             }

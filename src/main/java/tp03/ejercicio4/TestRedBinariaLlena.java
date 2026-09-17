@@ -35,5 +35,11 @@ public class TestRedBinariaLlena {
         int retardo = new RedBinariaLlena(arbolRaiz).retardoReenvio();
         System.out.println("El retardo de reenvio es: " + retardo); //valor esperado 13
 
+
+        //ahora cuando el arbol no esta lleno
+        arbolHijo2.eliminarHijoDerecho();
+        int retardo2 = new RedBinariaLlena(arbolRaiz).retardoReenvio();
+        System.out.println("El retardo de reenvio es: " + retardo2); //valor esperado -1
+
     }
 }

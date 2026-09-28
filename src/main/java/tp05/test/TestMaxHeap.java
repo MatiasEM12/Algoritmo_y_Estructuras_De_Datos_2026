@@ -8,7 +8,7 @@ public class TestMaxHeap {
         MaxHeap<Integer> heap = new MaxHeap<>();
 
 
-        System.out.println("===== CREAR HEAP =====");
+        System.out.println(" CREAR HEAP ");
 
         heap.agregar(10);
         heap.agregar(20);
@@ -23,7 +23,7 @@ public class TestMaxHeap {
 
 
         System.out.println();
-        System.out.println("===== ELIMINAR =====");
+        System.out.println(" ELIMINAR ");
 
         heap.eliminar();
 
@@ -32,7 +32,7 @@ public class TestMaxHeap {
 
 
         System.out.println();
-        System.out.println("===== ELIMINAR OTRA VEZ =====");
+        System.out.println(" ELIMINAR OTRA VEZ ");
 
         heap.eliminar();
 

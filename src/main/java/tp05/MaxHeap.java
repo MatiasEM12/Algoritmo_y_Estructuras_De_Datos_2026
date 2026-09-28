@@ -129,24 +129,21 @@ public class MaxHeap <T> implements ColaPrioridades<T> {
     }
 
     public void imprimir() {
+
         if (!esVacia()) {
-            imprimir(0, "");
-        }
-    }
 
-    private void imprimir(int posicion, String sangria) {
+            for (int i = 0; i < this.cantEltos; i++) {
 
-        System.out.println(sangria + "└─ " + this.datos[posicion]);
+                int nivel = (int) (Math.log(i + 1) / Math.log(2));
 
-        int hijoIzquierdo = 2 * posicion + 1;
-        int hijoDerecho = 2 * posicion + 2;
+                String sangria = "";
 
-        if (hijoIzquierdo < this.cantEltos) {
-            imprimir(hijoIzquierdo, sangria + "    ");
-        }
+                for (int j = 0; j < nivel; j++) {
+                    sangria += "    ";
+                }
 
-        if (hijoDerecho < this.cantEltos) {
-            imprimir(hijoDerecho, sangria + "    ");
+                System.out.println(sangria + "└─ " + this.datos[i]);
+            }
         }
     }
 }

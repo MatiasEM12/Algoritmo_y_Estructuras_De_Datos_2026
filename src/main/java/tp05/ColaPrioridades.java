@@ -9,4 +9,6 @@ public interface ColaPrioridades <T>{
     public boolean agregar(T dato);
 
     public void tope();
+
+    public T[] getDatos();
 }

@@ -146,4 +146,11 @@ public class MaxHeap <T> implements ColaPrioridades<T> {
             }
         }
     }
+
+
+
+    public T[] getDatos(){
+        return datos;
+    }
+
 }

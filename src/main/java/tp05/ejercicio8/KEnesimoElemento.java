@@ -16,24 +16,34 @@ public class KEnesimoElemento {
     public int elementoKMayor( Integer datos[], int posicion) {
 
         Integer datosAux[] = this.cargarHeap(datos);
-        Integer datosUnicos[] = this.eliminarRepetidos(datos,posicion);
-        return datosUnicos[posicion];
+        datosAux= filtrado(datosAux,posicion);
+        return datosAux[posicion];
     }
 
-    private Integer[] eliminarRepetidos( Integer datos[],int posicion) {
-        Integer datosUnicos[];
+    private Integer[] filtrado(Integer[] datos, int posicion) {
+        Integer datosAux[]=null;
 
-        for(int i =0;i <= posicion ;i++){
-            Integer aux = datos[i];
-            Integer aux2 = datos[i++];
-            if ( ){ //comparable
-                //si son diferentes
-                datosUnicos[i]=aux;
+        if(datos[0] > datos[posicion-1]){
+            //si la raiz es más grande que el elemento en una posicion K
+            //entonces se esta trabajando con una maxHeap por lo que se filtran
+            //los primeros N elementos
+            for(int i=0;i<posicion;i++) {
+                datosAux[i] = datos[i];
             }
+
+            return datosAux;
         }
 
-        return datosUnicos;
+        //si la raiz es más pequeña que el elemento en una posicion K
+        //entonces se esta trabajando con una minHeap por lo que se filtran
+        //los ultimos N elementos en orden inverso.
+        for(int i=posicion;i>=0;i--){
+            datosAux[i] = datos[i];
+        }
+
+        return datosAux;
     }
+
 
     private Integer[] cargarHeap(Integer datos[]){
         for(Integer dato : datos){

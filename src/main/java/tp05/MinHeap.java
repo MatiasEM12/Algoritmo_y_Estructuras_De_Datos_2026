@@ -126,21 +126,22 @@ public class MinHeap <T> implements ColaPrioridades<T> {
     }
 
     public void imprimir() {
-
         if (!esVacia()) {
+            imprimir(0, "");
+        }
+    }
 
-            for (int i = 0; i < this.cantEltos; i++) {
+    private void imprimir(int posicion, String sangria) {
 
-                int nivel = (int) (Math.log(i + 1) / Math.log(2));
+        if (posicion < this.cantEltos) {
 
-                String sangria = "";
+            System.out.println(sangria + "└─ " + this.datos[posicion]);
 
-                for (int j = 0; j < nivel; j++) {
-                    sangria += "    ";
-                }
+            int hijoIzquierdo = 2 * posicion + 1;
+            int hijoDerecho = 2 * posicion + 2;
 
-                System.out.println(sangria + "└─ " + this.datos[i]);
-            }
+            imprimir(hijoIzquierdo, sangria + "    ");
+            imprimir(hijoDerecho, sangria + "    ");
         }
     }
 

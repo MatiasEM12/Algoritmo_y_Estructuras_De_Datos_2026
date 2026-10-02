@@ -2,6 +2,7 @@ package tp05.ejercicio8;
 
 
 import tp05.ColaPrioridades;
+import tp05.MaxHeap;
 
 public class KEnesimoElemento {
 
@@ -13,42 +14,47 @@ public class KEnesimoElemento {
     }
 
 
-    public int elementoKMayor( Integer datos[], int posicion) {
+    public int elementoKMayor( Integer datos[], int k) {
 
-        Integer datosAux[] = this.cargarHeap(datos);
-        datosAux= filtrado(datosAux,posicion);
-        return datosAux[posicion];
-    }
 
-    private Integer[] filtrado(Integer[] datos, int posicion) {
-        Integer datosAux[]=null;
+        if (datos == null || k < 1 || k > datos.length) {
+            throw new IllegalArgumentException("K no es válido");
+        }
 
-        if(datos[0] > datos[posicion-1]){
-            //si la raiz es más grande que el elemento en una posicion K
-            //entonces se esta trabajando con una maxHeap por lo que se filtran
-            //los primeros N elementos
-            for(int i=0;i<posicion;i++) {
-                datosAux[i] = datos[i];
+        Integer[] datosAux = cargarHeap(datos);
+
+        MaxHeap<Integer> max = new MaxHeap<>();
+
+        for (Integer dato : datosAux) {
+            if (dato != null) {
+                max.agregar(dato);
             }
-
-            return datosAux;
         }
 
-        //si la raiz es más pequeña que el elemento en una posicion K
-        //entonces se esta trabajando con una minHeap por lo que se filtran
-        //los ultimos N elementos en orden inverso.
-        for(int i=posicion;i>=0;i--){
-            datosAux[i] = datos[i];
+        for (int i = 1; i < k; i++) {
+            max.eliminar();
         }
 
-        return datosAux;
+        Object[] elementos = max.getDatos();
+        return (Integer) elementos[0];
     }
 
 
-    private Integer[] cargarHeap(Integer datos[]){
-        for(Integer dato : datos){
-            heap.agregar( dato);
+
+    private Integer[] cargarHeap(Integer[] datos) {
+        for (Integer dato : datos) {
+            if (!heap.agregar(dato)) {
+                throw new IllegalArgumentException("No se pudo agregar el elemento al heap");
+            }
         }
-        return heap.getDatos();
+
+        Integer[] datosHeap = new Integer[datos.length];
+        Object[] elementos = heap.getDatos();
+
+        for (int i = 0; i < datos.length; i++) {
+            datosHeap[i] = (Integer) elementos[i];
+        }
+
+        return datosHeap;
     }
 }

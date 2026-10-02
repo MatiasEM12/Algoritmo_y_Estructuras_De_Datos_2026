@@ -12,9 +12,10 @@ public class TestMaxHeap {
 
         heap.agregar(10);
         heap.agregar(20);
-        heap.agregar(5);
-        heap.agregar(30);
         heap.agregar(15);
+        heap.agregar(30);
+        heap.agregar(40);
+
 
         System.out.println("Heap después de agregar:");
         heap.imprimir();

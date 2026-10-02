@@ -32,19 +32,20 @@ public class MaxHeap <T> implements ColaPrioridades<T> {
     @Override
     public void eliminar() {
 
-        if(!esVacia()){
-
+        if (!esVacia()) {
             int ultimo = this.cantEltos - 1;
 
+            if (ultimo == 0) {
+                this.datos[0] = null;
+                this.cantEltos--;
+            }
+
             this.datos[0] = this.datos[ultimo];
-
             this.datos[ultimo] = null;
-
             this.cantEltos--;
 
             percolate_down();
         }
-
     }
 
     @Override
@@ -66,7 +67,9 @@ public class MaxHeap <T> implements ColaPrioridades<T> {
     @Override
     public void tope() {
 
-        System.out.println(datos[0].toString());
+        if (!esVacia()) {
+            System.out.println(datos[0]);
+        }
     }
 
     private void percolate_up(){
@@ -93,6 +96,7 @@ public class MaxHeap <T> implements ColaPrioridades<T> {
 
         }
     }
+
 
     private void percolate_down() {
 
@@ -148,8 +152,13 @@ public class MaxHeap <T> implements ColaPrioridades<T> {
         }
     }
 
+    @Override
     public T[] getDatos(){
-        return datos;
+        T[] copia = (T[]) new Comparable[this.cantEltos];
+        for (int i = 0; i < this.cantEltos; i++) {
+            copia[i] = this.datos[i];
+        }
+        return copia;
     }
 
 }

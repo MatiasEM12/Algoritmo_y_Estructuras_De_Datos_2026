@@ -20,12 +20,8 @@ public class TestMaxHeap {
         System.out.println("Heap después de agregar:");
         heap.imprimir();
 
-
-
-
         System.out.println();
-        System.out.println(" ELIMINAR ");
-
+        System.out.println("Heap después de eliminar:");
         heap.eliminar();
 
         System.out.println("Heap después de eliminar:");
@@ -33,11 +29,14 @@ public class TestMaxHeap {
 
 
         System.out.println();
-        System.out.println(" ELIMINAR OTRA VEZ ");
-
+        System.out.println("Heap después de eliminar:");
         heap.eliminar();
 
         System.out.println("Heap después de eliminar:");
+        heap.imprimir();
+
+        System.out.println("Heap después deagregar:");
+        heap.agregar(100);
         heap.imprimir();
     }
 

@@ -11,6 +11,9 @@ public class KEnesimoElemento {
     private ColaPrioridades<Integer> heap;
 
     public KEnesimoElemento(){
+
+        //en este ejercicio veo que es mas facil usar un maxHeap para eliminar los elementos hasta llegar al k-esimo
+        //ya que el maxHeap me permite eliminar el elemento mas grande en O(log n) y asi ir eliminando hasta llegar al k-esimo
         this.heap= new MaxHeap<>();
     }
 
@@ -22,8 +25,10 @@ public class KEnesimoElemento {
             throw new IllegalArgumentException("K no es válido");
         }
 
+        //cargo los datos en un maxHeap
         cargarHeap(datos);
 
+        //elimino la raiz hasta llegar a la posicion K
         for (int i = 1; i < k; i++) {
             heap.eliminar();
         }

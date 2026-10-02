@@ -1,7 +1,7 @@
 package tp06;
 
-import tp01.ListaGenerica;
 
+import tp01.ejercicio2.ListaGenerica;
 
 /**
  * Representa el grafo, donde se mantiene la estructura como un todo.

@@ -58,6 +58,12 @@ public class VerticeImplListAdy<T> implements Vertice {
 
 
     public boolean esAdyacente(Vertice<T> v){
+
+        Arista<T> arista = this.obtenerArista(v);
+        if(arista!=null){
+            return true;
+        }
+
         return false;
     }
 

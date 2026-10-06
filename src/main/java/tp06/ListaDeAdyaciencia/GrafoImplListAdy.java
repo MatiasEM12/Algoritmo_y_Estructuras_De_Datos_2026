@@ -14,10 +14,16 @@ public class GrafoImplListAdy<T> implements Grafo {
     public GrafoImplListAdy(){
         this.vertices = new ListaEnlazadaGenerica<Vertice<T>>();
     }
+
+
     @Override
     public void agregarVertice(Vertice v) {
 
-        if(!existe(v)){
+        if (!existe(v)) {
+            VerticeImplListAdy<T> vertice = (VerticeImplListAdy<T>) v;
+
+            vertice.setPosicion(this.vertices.tamanio());
+
             this.vertices.agregarFinal(v);
         }
     }
@@ -32,8 +38,42 @@ public class GrafoImplListAdy<T> implements Grafo {
 
     @Override
     public void eliminarVertice(Vertice v) {
-        //antes verificar aristas y enlaces
+
+
+
+        //de V eliminar todas las aristas
+        ListaGenerica<Arista<T>> adyacentes = this.listaDeAdyacentes(v);
+
+        adyacentes.comenzar();
+        while(!adyacentes.fin()){
+            VerticeImplListAdy<T> vOrigen = (VerticeImplListAdy<T>) this.vetice(v.getPosicion());
+            vOrigen.desconectar(adyacentes.proximo().verticeDestino());
+        }
+
+
+        //luego de mis vertises eliminar aristas a v
+        this.vertices.comenzar();
+        while (!this.vertices.fin()){
+            VerticeImplListAdy<T> vOrigen = (VerticeImplListAdy<T>) this.vetice(this.vertices.proximo().getPosicion());
+            if(vOrigen.esAdyacente(v)){
+                vOrigen.desconectar(v);
+            }
+        }
+
         vertices.eliminar(v);
+        actualizarPosiciones();
+    }
+
+    //auxiliar para eliminar
+    private void actualizarPosiciones() {
+        this.vertices.comenzar();
+        int posicion = 0;
+        while (!this.vertices.fin()) {
+            VerticeImplListAdy<T> v = (VerticeImplListAdy<T>) this.vertices.proximo();
+
+            v.setPosicion(posicion);
+            posicion++;
+        }
     }
 
     @Override

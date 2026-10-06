@@ -64,7 +64,8 @@ public class GrafoImplListAdy<T> implements Grafo {
         actualizarPosiciones();
     }
 
-    //auxiliar para eliminar
+    //auxiliar para eliminar, cuando elimino un vertice debo actualizar las posiciones de los otros vertices
+
     private void actualizarPosiciones() {
         this.vertices.comenzar();
         int posicion = 0;

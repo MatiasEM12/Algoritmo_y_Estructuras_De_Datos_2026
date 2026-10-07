@@ -71,7 +71,7 @@ public class VerticeImplListAdy<T> implements Vertice {
 
         Arista<T> arista = this.obtenerArista(v);
         if(arista!=null){
-            arista.peso();
+            return arista.peso();
         }
         return 0;
     }

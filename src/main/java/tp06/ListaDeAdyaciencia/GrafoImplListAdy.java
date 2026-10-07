@@ -22,7 +22,7 @@ public class GrafoImplListAdy<T> implements Grafo {
         if (!existe(v)) {
             VerticeImplListAdy<T> vertice = (VerticeImplListAdy<T>) v;
 
-            vertice.setPosicion(this.vertices.tamanio());
+            vertice.setPosicion(this.vertices.tamanio()+1);
 
             this.vertices.agregarFinal(v);
         }
@@ -68,7 +68,7 @@ public class GrafoImplListAdy<T> implements Grafo {
 
     private void actualizarPosiciones() {
         this.vertices.comenzar();
-        int posicion = 0;
+        int posicion = 1;
         while (!this.vertices.fin()) {
             VerticeImplListAdy<T> v = (VerticeImplListAdy<T>) this.vertices.proximo();
 

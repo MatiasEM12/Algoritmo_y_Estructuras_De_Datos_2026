@@ -16,7 +16,7 @@ public class MinHeap <T> implements ColaPrioridades<T> {
     public MinHeap(ListaGenerica<T> lista) {
         if(lista!=null || !lista.esVacia()){
             this.cantEltos=0;
-            while (!lista.esVacia()){
+            while (!lista.fin()){
                 this.agregar(lista.proximo());
             }
         }

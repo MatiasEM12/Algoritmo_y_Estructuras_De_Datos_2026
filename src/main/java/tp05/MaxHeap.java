@@ -15,9 +15,12 @@ public class MaxHeap <T> implements ColaPrioridades<T> {
     }
 
     public MaxHeap(ListaGenerica<T> lista) {
-        this.cantEltos=0;
-        while (!lista.esVacia()){
-            this.agregar(lista.proximo());
+        if(lista!=null || !lista.esVacia()){
+            this.cantEltos=0;
+            lista.comenzar();
+            while (!lista.fin()){
+                this.agregar(lista.proximo());
+            }
         }
     }
 

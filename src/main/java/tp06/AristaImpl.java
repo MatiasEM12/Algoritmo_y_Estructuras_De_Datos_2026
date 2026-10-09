@@ -1,7 +1,4 @@
-package tp06.ListaDeAdyaciencia;
-
-import tp06.Arista;
-import tp06.Vertice;
+package tp06;
 
 public class AristaImpl<T> implements Arista {
 

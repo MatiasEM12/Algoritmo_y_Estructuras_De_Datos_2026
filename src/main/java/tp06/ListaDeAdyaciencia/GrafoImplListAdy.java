@@ -152,7 +152,7 @@ public class GrafoImplListAdy<T> implements Grafo {
             return vOrigen.obtenerAdyacentes();
         }
 
-        return null;
+        return new ListaEnlazadaGenerica<Arista<T>>();
     }
 
     @Override

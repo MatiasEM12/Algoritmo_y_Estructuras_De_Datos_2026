@@ -95,10 +95,11 @@ public class TestListaDeAdyacencia {
 
         System.out.println("v1 -> v3 después de eliminar: " + grafo.esAdyacente(v1, v3));
 
-        adyacentesV3.comenzar();
+        ListaGenerica<Arista<Integer>> adyacentesV3Eliminado = grafo.listaDeAdyacentes(v3);
+        adyacentesV3Eliminado.comenzar();
 
-        while (!adyacentesV3.fin()) {
-            Arista<Integer> arista = adyacentesV3.proximo();
+        while (!adyacentesV3Eliminado.fin()) {
+            Arista<Integer> arista = adyacentesV3Eliminado.proximo();
 
             System.out.println("v3 -> " + arista.verticeDestino().dato() + " - Peso: " + arista.peso());
         }

@@ -3,6 +3,7 @@ package tp06.ListaDeAdyaciencia;
 import tp01.ejercicio2.ListaEnlazadaGenerica;
 import tp01.ejercicio2.ListaGenerica;
 import tp06.Arista;
+import tp06.AristaImpl;
 import tp06.Vertice;
 
 public class VerticeImplListAdy<T> implements Vertice {

@@ -4,8 +4,8 @@ import tp01.ejercicio2.ListaEnlazadaGenerica;
 import tp01.ejercicio2.ListaGenerica;
 import tp06.Arista;
 import tp06.Grafo;
-import tp06.ListaDeAdyaciencia.AristaImpl;
-import tp06.ListaDeAdyaciencia.VerticeImplListAdy;
+import tp06.AristaImpl;
+
 import tp06.Vertice;
 
 public class GrafoImplMatrizAdy<T>  implements Grafo {
@@ -86,7 +86,7 @@ public class GrafoImplMatrizAdy<T>  implements Grafo {
         this.vertices.comenzar();
         int posicion = 0;
         while (!this.vertices.fin()) {
-            VerticeImplListAdy<T> v = (VerticeImplListAdy<T>) this.vertices.proximo();
+            VerticeImplMatrizAdy<T> v = (VerticeImplMatrizAdy<T>) this.vertices.proximo();
 
             v.setPosicion(posicion);
             posicion++;
@@ -120,7 +120,7 @@ public class GrafoImplMatrizAdy<T>  implements Grafo {
 
         if(existe(origen) && existe(destino)){
 
-            matrizAdy[origen.getPosicion()][origen.getPosicion()]=0;
+            matrizAdy[origen.getPosicion()][destino.getPosicion()]=0;
 
         }
     }
@@ -129,7 +129,7 @@ public class GrafoImplMatrizAdy<T>  implements Grafo {
     public boolean esAdyacente(Vertice origen, Vertice destino) {
         if(existe(origen) && existe(destino)){
 
-            int esAdy = matrizAdy[origen.getPosicion()][origen.getPosicion()];
+            int esAdy = matrizAdy[origen.getPosicion()][destino.getPosicion()];
             if(esAdy==0){
                 return false;
             }else{
@@ -144,7 +144,7 @@ public class GrafoImplMatrizAdy<T>  implements Grafo {
     public int peso(Vertice origen, Vertice destino) {
         if(existe(origen) && existe(destino)){
 
-            return matrizAdy[origen.getPosicion()][origen.getPosicion()];
+            return matrizAdy[origen.getPosicion()][destino.getPosicion()];
 
         }
         return 0;

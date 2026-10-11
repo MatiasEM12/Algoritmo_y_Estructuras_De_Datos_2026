@@ -31,6 +31,12 @@ public class VisitaOslo {
         if(!this.existeDestino(lugares,destino)){
             return resultado;
         }
+
+        Vertice<String> origen = buscarOrigen(lugares);
+        if (origen == null) {
+            return resultado;
+        }
+
         this.destino=destino;
         this.maxTiempo=maxTiempo;
         this.lugaresRestringidos=lugaresRestringidos;
@@ -42,7 +48,7 @@ public class VisitaOslo {
             marca[i]=false;
         }
 
-        return  dfsPaseoEnBici(lugares,resultado, 0, lugares.listaDeVertices().elemento(1));
+        return  dfsPaseoEnBici(lugares,resultado, 0, origen);
     }
 
     private boolean existeDestino(Grafo<String> lugares, String destino) {
@@ -58,6 +64,21 @@ public class VisitaOslo {
         return false;
     }
 
+    private Vertice<String> buscarOrigen(Grafo<String> lugares) {
+        ListaGenerica<Vertice<String>> vertices = lugares.listaDeVertices();
+
+        vertices.comenzar();
+
+        while (!vertices.fin()) {
+            Vertice<String> v = vertices.proximo();
+
+            if (v.dato().equalsIgnoreCase("Ayuntamiento")) {
+                return v;
+            }
+        }
+
+        return null;
+    }
     private ListaGenerica<String> dfsPaseoEnBici(Grafo<String> lugares, ListaGenerica<String> resultado,  int tiempoActual, Vertice<String> v) {
 
         return resultado;

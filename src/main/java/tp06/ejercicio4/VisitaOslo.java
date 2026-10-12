@@ -2,6 +2,7 @@ package tp06.ejercicio4;
 
 import tp01.ejercicio2.ListaEnlazadaGenerica;
 import tp01.ejercicio2.ListaGenerica;
+import tp06.Arista;
 import tp06.Grafo;
 import tp06.Vertice;
 
@@ -48,7 +49,11 @@ public class VisitaOslo {
             marca[i]=false;
         }
 
-        return  dfsPaseoEnBici(lugares,resultado, 0, origen);
+        if (dfsPaseoEnBici(lugares, 0, origen)) {
+            return this.camino;
+        }
+
+        return resultado;
     }
 
     private boolean existeDestino(Grafo<String> lugares, String destino) {
@@ -79,8 +84,49 @@ public class VisitaOslo {
 
         return null;
     }
-    private ListaGenerica<String> dfsPaseoEnBici(Grafo<String> lugares, ListaGenerica<String> resultado,  int tiempoActual, Vertice<String> v) {
 
-        return resultado;
+    private boolean dfsPaseoEnBici(Grafo<String> lugares, int tiempoActual, Vertice<String> v) {
+
+
+        if (lugaresRestringidos.incluye(v.dato())) {
+            return false;
+        }
+
+
+        if (tiempoActual > maxTiempo) {
+            return false;
+        }
+
+        camino.agregarFinal(v.dato());
+        marca[v.getPosicion()] = true;
+
+        // Caso base
+        if (v.dato().equalsIgnoreCase(destino)) {
+            return true;
+        }
+
+
+        //buscar el camino
+        ListaGenerica<Arista<String>> adyacentes = lugares.listaDeAdyacentes(v);
+
+        adyacentes.comenzar();
+        while (!adyacentes.fin()) {
+            Arista<String> arista = adyacentes.proximo();
+            Vertice<String> w = arista.verticeDestino();
+
+            if (!marca[w.getPosicion()]) {
+                int nuevoTiempo = tiempoActual + arista.peso();
+
+                if (dfsPaseoEnBici(lugares, nuevoTiempo, w)) {
+                    return true;
+                }
+            }
+        }
+
+        //el camino  no funcionó.
+        marca[v.getPosicion()] = false;
+        camino.eliminarEn(camino.tamanio());
+
+        return false;
     }
 }

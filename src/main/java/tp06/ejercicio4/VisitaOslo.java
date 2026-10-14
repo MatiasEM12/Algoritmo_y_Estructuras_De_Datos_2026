@@ -42,6 +42,9 @@ public class VisitaOslo {
         if (origen == null) {
             return resultado;
         }
+        if(lugaresRestringidos.incluye(origen.dato()) || lugaresRestringidos.incluye(destino)){
+            return resultado;
+        }
         if (!this.dfsOslo(lugares, origen, destino, 0, lugaresRestringidos, resultado)) {
             resultado = new ListaEnlazadaGenerica<String>(); // sin camino: lista vacía
         }

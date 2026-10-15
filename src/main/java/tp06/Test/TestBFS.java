@@ -1,4 +1,4 @@
-package tp06.ejercicio2;
+package tp06.Test;
 
 import tp01.ejercicio2.ListaGenerica;
 import tp06.Grafo;
@@ -7,6 +7,7 @@ import tp06.ListaDeAdyaciencia.VerticeImplListAdy;
 import tp06.MatrizDeAdyacencia.GrafoImplMatrizAdy;
 import tp06.MatrizDeAdyacencia.VerticeImplMatrizAdy;
 import tp06.Vertice;
+import tp06.ejercicio2.Recorridos;
 
 public class TestBFS {
 

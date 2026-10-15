@@ -1,10 +1,11 @@
-package tp06.ejercicio4;
+package tp06.Test;
 
 import tp01.ejercicio2.ListaEnlazadaGenerica;
 import tp01.ejercicio2.ListaGenerica;
 import tp06.ListaDeAdyaciencia.GrafoImplListAdy;
 import tp06.ListaDeAdyaciencia.VerticeImplListAdy;
 import tp06.Vertice;
+import tp06.ejercicio4.VisitaOslo;
 
 public class TestVisitaOslo {
 

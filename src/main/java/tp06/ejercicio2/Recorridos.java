@@ -16,10 +16,6 @@ public class Recorridos<T> {
         }
         boolean []marca = new boolean[grafo.listaDeVertices().tamanio()+1];
 
-        for(int i=0; i<marca.length; i++){
-            marca[i]=false;
-        }
-
         ListaGenerica<Vertice<T>> vertices = grafo.listaDeVertices();
         vertices.comenzar();
         while(!vertices.fin()) {
@@ -34,11 +30,10 @@ public class Recorridos<T> {
         return resultado;
     }
 
-    private ListaGenerica<T> dfs(Grafo<T> grafo, Vertice<T> v, boolean[] marca,  ListaGenerica<T> resultado ) {
+    private void dfs(Grafo<T> grafo, Vertice<T> v, boolean[] marca,  ListaGenerica<T> resultado ) {
 
         marca[v.getPosicion()]=true;
         ListaGenerica<Arista<T>>adyacentes =grafo.listaDeAdyacentes(v);
-
 
         resultado.agregarFinal(v.dato());
         adyacentes.comenzar();
@@ -50,7 +45,7 @@ public class Recorridos<T> {
                 dfs(grafo, w, marca, resultado);
             }
         }
-       return resultado;
+
     }
 
     public ListaGenerica<T> bfs(Grafo<T> grafo){
@@ -59,13 +54,13 @@ public class Recorridos<T> {
             return null;
         }
 
-        Vertice<T> v = grafo.vetice(1);
+        Vertice<T> v = grafo.inicio();
         ListaGenerica<Vertice<T> > cola = new ListaEnlazadaGenerica<Vertice<T> >();
-        ListaGenerica<Vertice<T> > visitados = new ListaEnlazadaGenerica<Vertice<T> >();
+        boolean []marca = new boolean[grafo.listaDeVertices().tamanio()+1];
         ListaGenerica<T> resultado = new ListaEnlazadaGenerica<T>();
 
         cola.agregarFinal(v);
-        visitados.agregarFinal(v);
+        marca[v.getPosicion()]=true;
 
 
         while(!cola.esVacia()){
@@ -82,10 +77,9 @@ public class Recorridos<T> {
                 Vertice<T> w = arista.verticeDestino();
 
 
-                if (!visitados.incluye(w)) {
+                if (!marca[w.getPosicion()]) {
 
-
-                    visitados.agregarFinal(w);
+                    marca[w.getPosicion()]=true;
                     cola.agregarFinal(w);
                 }
             }

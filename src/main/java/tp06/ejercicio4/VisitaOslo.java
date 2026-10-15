@@ -31,13 +31,13 @@ public class VisitaOslo {
             return resultado;
         }
 
-        if (!this.existeVertice(lugares, destino)) {
+        if (!lugares.existeVertice(destino)) {
             return resultado;
         }
 
         this.marca = new boolean[lugares.listaDeVertices().tamanio() + 1];
         this.maxTiempo=maxTiempo;
-        Vertice<String> origen = buscarOrigen(lugares);
+        Vertice<String> origen = lugares.buscarVertice(this.origen);
 
         if (origen == null) {
             return resultado;
@@ -85,30 +85,5 @@ public class VisitaOslo {
         return encontrado;
     }
 
-    //auxilires
-    private Vertice<String> buscarOrigen(Grafo<String> lugares) {
-        ListaGenerica<Vertice<String>> vertices = lugares.listaDeVertices();
-        vertices.comenzar();
-        while(!vertices.fin()){
-            Vertice<String> v = vertices.proximo();
-            if(v.dato().equals(this.origen)){
-                return v;
-            }
-        }
-        return null;
-    }
-
-    private boolean existeVertice(Grafo<String> lugares, String dato) {
-        ListaGenerica<Vertice<String>> vertices = lugares.listaDeVertices();
-
-        vertices.comenzar();
-        while(!vertices.fin()){
-            Vertice<String> v = vertices.proximo();
-            if(v.dato().equals(dato)){
-                return true;
-            }
-        }
-        return false;
-    }
 }
 

@@ -105,4 +105,13 @@ public interface Grafo<T> {
 	 */
 	public Vertice<T> vetice(int posicion);
 
+
+	//auxilar
+	public Vertice<T> inicio();
+
+
+	public Vertice<T> buscarVertice( T elem);
+
+	public boolean existeVertice(T elem);
+
 }

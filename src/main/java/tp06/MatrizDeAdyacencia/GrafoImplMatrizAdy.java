@@ -181,6 +181,44 @@ public class GrafoImplMatrizAdy<T>  implements Grafo {
 
     @Override
     public Vertice vetice(int posicion) {
-        return vertices.elemento(posicion);
+        return vertices.elemento(posicion+1);
+    }
+
+    @Override
+    public Vertice inicio() {
+        if(!esVacio()){
+            return vertices.elemento(1);
+        }
+        return null;
+    }
+
+    @Override
+    public Vertice buscarVertice(Object elem) {
+
+        if(existeVertice(elem)){
+            ListaGenerica<Vertice<T>> vertices = this.listaDeVertices();
+            vertices.comenzar();
+            while(!vertices.fin()){
+                Vertice<T> v = vertices.proximo();
+                if(v.dato().equals(elem)){
+                    return v;
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean existeVertice(Object elem) {
+        ListaGenerica<Vertice<T>> vertices = this.listaDeVertices();
+
+        vertices.comenzar();
+        while(!vertices.fin()){
+            Vertice<T> v = vertices.proximo();
+            if(v.dato().equals(elem)){
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -82,7 +82,7 @@ public class VisitaOslo {
         }
 
         if (!encontrado) {
-            // backtracking: desmarcar y sacar del camino
+            // backtracking: se desenmarca y se saca del resultado(camino)
             this.marca[v.getPosicion()] = false;
             resultado.eliminarEn(resultado.tamanio());
         }

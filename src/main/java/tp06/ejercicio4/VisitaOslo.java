@@ -19,11 +19,15 @@ public class VisitaOslo {
     public ListaGenerica<String> paseoEnBici(Grafo<String> lugares, String destino, int maxTiempo, ListaGenerica<String> lugaresRestringidos) {
 
         ListaGenerica<String> resultado = new ListaEnlazadaGenerica<String>();
+
+        if (this.origen == null || this.origen.isEmpty()) {
+            return resultado;
+        }
         if (lugares == null || lugares.listaDeVertices().esVacia()) {
             return resultado;
         }
 
-        if (destino == null || destino.isEmpty() || maxTiempo <= 0) {
+        if (destino == null || destino.isEmpty() || maxTiempo < 0) {
             return resultado;
         }
 

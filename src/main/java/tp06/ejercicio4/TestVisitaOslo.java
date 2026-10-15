@@ -123,5 +123,15 @@ public class TestVisitaOslo {
 
         }
 
+        /*
+        * Resultado Posible 1 : Ayuntamiento, El Tigre, Museo Munch, Parque Botánico, Galería
+                                Nacional, Parque Vigeland, FolkMuseum, Museo Fram, Museo del
+                                Barco Polar, Museo Vikingo. El recorrido se hace en 91 minutos.
+
+        *Resultado Posible 2: Ayuntamiento, Parque Botánico, Galería Nacional, Parque
+                                Vigeland, FolkMuseum, Museo Fram, Museo del Barco Polar,
+                                Museo Vikingo. El recorrido se hace en 70 minutos.
+
+        * */
     }
 }
